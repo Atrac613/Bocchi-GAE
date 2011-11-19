@@ -1,0 +1,41 @@
+application: bocchi-hr
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: web/css
+
+- url: /images
+  static_dir: web/images
+
+- url: /js
+  static_dir: web/js
+
+- url: /bot/.*
+  login: required
+  script: bot.py
+
+- url: /user/home
+  login: required
+  script: user.py
+  
+- url: /user/.*
+  script: user.py
+
+- url: /api/.*
+  login: required
+  script: api.py
+  
+- url: /cron/.*
+  login: admin
+  script: cron.py
+  
+- url: /task/.*
+  login: admin
+  script: task.py
+
+- url: /.*
+  script: main.py
+  

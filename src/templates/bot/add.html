@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="/css/iphone.css" />
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script language="Javascript" type="text/javascript">
+	google.load("jquery", "1");
+</script>
+
+<script type="text/javascript">
+$(function() {
+	$('#save').click(function(){
+		var bot_id = $('#bot_id').val();
+		if(!bot_id.match( /[^0-9A-Za-z]+/ )){
+			$('form').submit();
+		}else{
+			alert("Bot ID is only alphanumeric character.");
+		}
+	});
+});
+function clickclear(thisfield, defaulttext) {
+	if (thisfield.value == defaulttext) {
+		thisfield.value = "";
+	}
+}
+function clickrecall(thisfield, defaulttext) {
+	if (thisfield.value == "") {
+		thisfield.value = defaulttext;
+	}
+}
+</script>
+
+<title>Bot Admin | I miss you. </title>
+
+</head>
+<body>
+<h1>Create</h1>
+
+{% if message %}
+<p style="color:red;"><b>{{ message }}</b></p>
+{% endif %}
+
+<form action="/bot/add" method="post">
+	<ul class="field">
+		<li><input type="text" name="bot_id" id="bot_id" value="Bot ID" onclick="clickclear(this, 'Bot ID')" onblur="clickrecall(this,'Bot ID')" /></li>
+		<li><input type="text" name="nickname" value="Nickname" onclick="clickclear(this, 'Nickname')" onblur="clickrecall(this,'Nickname')" /></li>
+	</ul>
+	
+	<p><a href="#" id="save" class="button white">Save</a></p>
+</form>
+
+</body>
+</html>

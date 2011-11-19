@@ -1,0 +1,40 @@
+{% load i18n %}
+
+{% extends "base_generic.html" %}
+
+{% block title %}Bocchi{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(function() {
+	window.location = "fntf://www.fake-notify.com/update/device_token";
+});
+
+function setDeviceToken(token){
+	//$('input[@ name=device_token]').attr('value', 'tes');
+	$("#device_token").val(token);
+	
+	{% ifequal signup 'true' %}
+	$('#signup').submit();
+	{% endifequal %}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 100px;margin-bottom:50px;">
+<p><strong>{% trans "Fake Notify is save your Push Notification." %}</strong></p>
+<p><strong>{% trans "You can create a own notification bot systems." %}</strong></p>
+</div>
+
+<form action="/user/welcome" method="post">
+	<center><input type="submit" value="Start" /></center>
+</form>
+
+<form action="/user/home" method="post" id="signup">
+	<input type="hidden" name="device_token" id="device_token" value="{{ device_token }}" />
+</form>
+
+{% endblock %}

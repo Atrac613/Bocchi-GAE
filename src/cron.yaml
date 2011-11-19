@@ -1,0 +1,4 @@
+cron:
+- description: notify job
+  url: /cron/notify
+  schedule: every 10 minutes
