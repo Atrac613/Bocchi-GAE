@@ -5,9 +5,14 @@
 <meta name="viewport" id="viewport" content="width=320, user-scalable=no, minimum-scale=1, maximum-scale=1" />
 <meta name="format-detection" content="telephone=no">
 
-<link rel="stylesheet" href="/css/iphone.css" />
+<link rel="stylesheet" href="/iui/iui.css" type="text/css" />
+<link rel="stylesheet" href="/iui/ext-sandbox/masabi/t/default/iui_ext.css" type="text/css" />
+<link rel="stylesheet" title="Default" href="/iui/t/default/default-theme.css"  type="text/css"/>
+<link rel="stylesheet" href="/css/iui-panel-list.css" type="text/css" />
 
 {% block css %}{% endblock %}
+<script type="application/x-javascript" src="/iui/ext-sandbox/masabi/iui_ext.js"></script>
+<script type="application/x-javascript" src="/iui/iui.js"></script>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -21,7 +26,11 @@
 
 </head>
 <body>
-	
+<div class="toolbar" style="display:none;">
+<h1 id="pageTitle">iUI Framework</h1>
+<a id="backButton" class="button" href="#"></a>
+</div>
+    
 {% block content %}{% endblock %}
 
 </body>

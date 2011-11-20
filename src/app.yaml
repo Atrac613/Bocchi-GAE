@@ -12,6 +12,9 @@ handlers:
 
 - url: /js
   static_dir: web/js
+  
+- url: /iui
+  static_dir: web/iui
 
 - url: /bot/.*
   login: required

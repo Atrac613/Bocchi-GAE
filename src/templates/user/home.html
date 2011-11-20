@@ -9,79 +9,107 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
+	/*
 	$('#save').click(function(){
+	//$('form').submit(function(){
 		//$('form').submit();
+
 		var postData = {};
-        $('form').find('select').each(function(){
+        $('#scr_home').find('input').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
-        $('form').find(':checked').each(function(){
+        $('#scr_home').find(':checked').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
         
         $.post('/api/update/user_prefs', postData, function(data){
         	if (data.status) {
-        		alert('Saved');
+        		window.location = "bocc://bocchi.atrac613.io/alert/saved";
         	}
         }, 'JSON');
  
         return false;
-	});
-	
-	$('form').submit(function(){
-		return false;
-	});
+	});*/
 });
 </script>
 
 {% endblock %}
 
 {% block content %}
-<h1>Quantity</h1>
-<ul class="field">
-	<li>{{ quantity }}</li>
-</ul>
 
-<form action="/user/home" method="post">
-	<h1>{% trans "Daily Max Notify Count" %}</h1>
-	<ul class="field">
-		<li>
-			<select name="daily_max_notify_count">
+<form id="scr_home" class="panel" title="Home" selected="true" onsubmit="return alert('ss')">
+<h2>Status</h2>
+<fieldset>
+    <div class="row">
+    	<label>Quantity</label>
+        <span>{{ quantity }}</span>
+    </div>
+</fieldset>
+	
+<h2>{% trans "Daily Max Notify Count" %}</h2>
+<fieldset>
+    <div class="row"><label for="daily_max_notify_count">{% trans "Daily Max Notify Count" %}</label>
+    	<select id="dailyNotify" class="panel" name="daily_max_notify_count">
 		{% for i in max_notify_list %}
 		<option value="{{ i }}" {% ifequal i user_prefs.daily_max_notify_count %} selected="selected"{% endifequal %}>{{ i }}</option>
 		{% endfor %}
-	</select>
-		</li>
-	</ul>
-	
-	<h1>{% trans "Schedule" %}</h1>
-	<ul class="form">
-		<li><input type="checkbox" name="0000_0300" title="00:00 - 03:00" value="1" {% if user_prefs.schedule_0000_0300 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="0300_0600" title="03:00 - 06:00" value="1" {% if user_prefs.schedule_0300_0600 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="0600_0900" title="06:00 - 09:00" value="1" {% if user_prefs.schedule_0600_0900 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="0900_1200" title="09:00 - 12:00" value="1" {% if user_prefs.schedule_0900_1200 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="1200_1500" title="12:00 - 15:00" value="1" {% if user_prefs.schedule_1200_1500 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="1500_1800" title="15:00 - 18:00" value="1" {% if user_prefs.schedule_1500_1800 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="1800_2100" title="18:00 - 21:00" value="1" {% if user_prefs.schedule_1800_2100 %}checked="checked"{% endif %} /></li>
-		<li><input type="checkbox" name="2100_2400" title="21:00 - 24:00" value="1" {% if user_prefs.schedule_2100_2400 %}checked="checked"{% endif %} /></li>
-	</ul>
-	
-	<h1>{% trans 'Timezone' %}</h1>
-	<ul class="field">
-		<li><select name="timezone">
+		</select>
+	</div>
+</fieldset>
+
+<h2>{% trans "Schedule" %}</h2>
+<fieldset>
+    <div class="row">
+        <label>00:00 - 03:00</label>
+        <input type="checkbox" name="0000_0300" title="0000_0300" value="1" {% if user_prefs.schedule_0000_0300 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>03:00 - 06:00</label>
+        <input type="checkbox" name="0300_0600" value="1" {% if user_prefs.schedule_0300_0600 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>06:00 - 09:00</label>
+        <input type="checkbox" name="0600_0900" value="1" {% if user_prefs.schedule_0600_0900 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>09:00 - 12:00</label>
+        <input type="checkbox" name="0900_1200" value="1" {% if user_prefs.schedule_0900_1200 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>12:00 - 15:00</label>
+        <input type="checkbox" name="1200_1500" value="1" {% if user_prefs.schedule_1200_1500 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>15:00 - 18:00</label>
+        <input type="checkbox" name="1500_1800" value="1" {% if user_prefs.schedule_1500_1800 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>18:00 - 21:00</label>
+        <input type="checkbox" name="1800_2100" value="1" {% if user_prefs.schedule_1800_2100 %}checked="checked"{% endif %} />
+    </div>
+    <div class="row">
+        <label>21:00 - 24:00</label>
+        <input type="checkbox" name="2100_2400" value="1" {% if user_prefs.schedule_2100_2400 %}checked="checked"{% endif %} />
+    </div>
+</fieldset>
+
+<h2>{% trans 'Timezone' %}</h2>
+<fieldset>
+    <div class="row"><label for="timezone">Timezone</label>
+    	<select id="timezone" class="panel" name="timezone">
 			<option value="9">Japan (GMT +0900)</option>
 			<option value="-6">US (GMT -0600)</option>
-		</select></li>
-	</ul>
-	
-	<p><a href="#" class="button white" id="save">Save</a></p>
-</form>
+		</select>
+	</div>
+</fieldset>
 
-<hr />
+<a class="whiteButton" type="submit" id="save">Submit</a>
 
-<ul>
+<ul style="margin-top: 20px;">
 	<li class="arrow"><a href="/user/bot">Bot Config</a></li>
 	<li class="arrow"><a href="/bot/">Bot Admin</a></li>
 </ul>
+
+</form>
 
 {% endblock %}

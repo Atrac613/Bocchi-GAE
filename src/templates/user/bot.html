@@ -8,28 +8,28 @@
 
 {% block javascript %}
 <script type="text/javascript">
+/*
 $(function() {
-	$('#save').click(function(){
+	$('#scr_bot .whiteButton').click(function(){
+		alert('ddd');
+		return;
+	//$('#scr_bot').submit(function(){
 		//$('form').submit();
 		var postData = {};
-        $('form').find('select').each(function(){
+        $('#scr_bot').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
-        $('form').find('input').each(function(){
+        $('#scr_bot').find('input').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
         
         $.post('/api/update/bot', postData, function(data){
         	if (data.status) {
-        		alert('Saved');
+        		window.location = "bocc://bocchi.atrac613.io/alert/saved";
         	}
         }, 'JSON');
  
         return false;
-	});
-	
-	$('form').submit(function(){
-		return false;
 	});
 });
 function clickclear(thisfield, defaulttext) {
@@ -41,31 +41,44 @@ function clickrecall(thisfield, defaulttext) {
 	if (thisfield.value == "") {
 		thisfield.value = defaulttext;
 	}
-}
+}*/
 </script>
 {% endblock %}
 
 {% block content %}
-<h1>Bot</h1>
-<ul class="field">
-	<li><h3>Bot ID</h3>{{ user_prefs.bot_prefs_key.bot_id }}</li>
-	<li><h3>Nickname</h3>{{ user_prefs.bot_prefs_key.nickname }}</li>
-</ul>
 
-<hr />
+<form id="scr_bot" class="panel" title="Bot" selected="true" onsubmit="alert('ddd');">
+<input type="hidden" name="key" value="{{ key }}" />
+<h2>Status</h2>
+<fieldset>
+    <div class="row">
+    	<label>Bot ID</label>
+        <span>{{ user_prefs.bot_prefs_key.bot_id }}</span>
+    </div>
+    <div class="row">
+    	<label>Nickname</label>
+        <span>{{ user_prefs.bot_prefs_key.nickname }}</span>
+    </div>
+</fieldset>
 
-<h1>Choose Bot ID</h1>
-<form action="/user/bot" method="post">
-	<input type="hidden" name="key" value="{{ key }}" />
-	<ul class="field">
-		<li><select name="bot_id">
+<h2>Choose Bot ID</h2>
+<fieldset>
+    <div class="row">
+    	<label for="bot_id">Bot ID</label>
+        <select name="bot_id" class="panel">
 		<option value="_custom">Custom</option>
 		{% for row in bot_list %}
 		<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.nickname }}</option>
 		{% endfor %}
-	</select></li>
-	<li><input type="text" name="custom_bot_id" value="Custom ID" onclick="clickclear(this, 'Custom ID')" onblur="clickrecall(this,'Custom ID')" /></li>
-	</ul>
-	<p><a href="#" id="save" class="button white">Save</a></p>
+	</select>
+    </div>
+    <div class="row">
+    	<label>Custom ID</label>
+        <input type="text" name="custom_bot_id" value="" />
+    </div>
+</fieldset>
+
+<a class="whiteButton" type="submit">Submit</a>
+
 </form>
 {% endblock %}
