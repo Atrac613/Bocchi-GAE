@@ -9,7 +9,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	window.location = "bocc://bocchi.atrac613.io/update/device_token";
+	//window.location = "bocc://bocchi.atrac613.io/update/device_token";
 });
 
 function setDeviceToken(token){
@@ -24,8 +24,11 @@ function setDeviceToken(token){
 {% endblock %}
 
 {% block content %}
-<div id="home" class="panel" selected="true">
-  <h2>What is Bocchi?</h2>
+<div data-role="page" class="type-interior">
+	<div data-role="content">
+		<div class="content-primary">
+			
+			  <h2>What is Bocchi?</h2>
   <fieldset>
 	  <p class="normalText">{% trans "Fake Notify is save your Push Notification." %}</p>
 	  <p class="normalText">{% trans "You can create a own notification bot systems." %}</p>
@@ -38,7 +41,8 @@ function setDeviceToken(token){
 <form action="/user/home" method="post" id="signup">
 	<input type="hidden" name="device_token" id="device_token" value="{{ device_token }}" />
 </form>
-
+			
+		</div>
+	</div>
 </div>
-
 {% endblock %}

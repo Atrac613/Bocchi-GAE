@@ -5,20 +5,11 @@
 <meta name="viewport" id="viewport" content="width=320, user-scalable=no, minimum-scale=1, maximum-scale=1" />
 <meta name="format-detection" content="telephone=no">
 
-<link rel="stylesheet" href="/iui/iui.css" type="text/css" />
-<link rel="stylesheet" href="/iui/ext-sandbox/masabi/t/default/iui_ext.css" type="text/css" />
-<link rel="stylesheet" title="Default" href="/iui/t/default/default-theme.css"  type="text/css"/>
-<link rel="stylesheet" href="/css/iui-panel-list.css" type="text/css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
 
 {% block css %}{% endblock %}
-<script type="application/x-javascript" src="/iui/ext-sandbox/masabi/iui_ext.js"></script>
-<script type="application/x-javascript" src="/iui/iui.js"></script>
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-<script language="Javascript" type="text/javascript">
-	google.load("jquery", "1");
-</script>
 
 {% block javascript %}{% endblock %}
 
@@ -26,10 +17,6 @@
 
 </head>
 <body>
-<div class="toolbar" style="display:none;">
-<h1 id="pageTitle">iUI Framework</h1>
-<a id="backButton" class="button" href="#"></a>
-</div>
     
 {% block content %}{% endblock %}
 
