@@ -9,27 +9,115 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	/*
-	$('#save').click(function(){
-	//$('form').submit(function(){
-		//$('form').submit();
-
+	$('#home').live('submit', function(){
 		var postData = {};
-        $('#scr_home').find('input').each(function(){
+        $('form').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
-        $('#scr_home').find(':checked').each(function(){
+        $('form').find(':checked').each(function(){
             postData[$(this).attr('name')] = $(this).val();
         });
         
         $.post('/api/update/user_prefs', postData, function(data){
         	if (data.status) {
-        		window.location = "bocc://bocchi.atrac613.io/alert/saved";
+        		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
         	}
         }, 'JSON');
  
         return false;
-	});*/
+	});
+	
+	$('#bot').live('submit', function(){
+		var postData = {};
+        $('form').find('select').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        $('form').find('input').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        
+        $.post('/api/update/bot', postData, function(data){
+        	if (data.status) {
+        		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
+        	}
+        }, 'JSON');
+ 
+        return false;
+	});
+	
+	$('#bot_create').live('submit', function(){
+		var bot_id = $('#bot_id').val();
+		if(!bot_id.match( /[^0-9A-Za-z]+/ )){
+			$('#bot_create form').submit();
+		}else{
+			alert("Bot ID is only alphanumeric character.");
+		}
+ 
+        return false;
+	});
+	
+	$('#bot_edit').live('submit', function(){
+		var postData = {};
+        $('form').find('input:hidden').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        $('form').find('input:text').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        $('form').find(':checked').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        
+        $.post('/api/update/bot/edit', postData, function(data){
+        	if (data.status) {
+        		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
+        	}
+        }, 'JSON');
+
+        return false;
+	});
+	
+	$('#bot_add_message').live('submit', function(){
+		var postData = {};
+        $('form').find('input:hidden').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        $('form').find('input:text').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        $('form').find('select').each(function(){
+            postData[$(this).attr('name')] = $(this).val();
+        });
+        
+        var bot_id = $("#bot_id").val();
+        
+        $.post('/api/update/bot/add_message', postData, function(data){
+        	if (data.status) {
+        		$.mobile.changePage("/bot/schedule_list?bot_id=" + bot_id, 'slideup');
+        		//window.location = "/bot/schedule_list?bot_id=" + bot_id;
+        	}
+        }, 'JSON');
+
+        return false;
+	});
+	
+	$('#bot_schedule a').live('click', function(){
+	//$('#bot_schedule a').bind('tap',function(){
+		if (window.confirm('Are you sure you want to delete?')) {
+			//$('form').submit();
+			var postData = {};
+	        $(this).find('input:hidden').each(function(){
+	            postData[$(this).attr('name')] = $(this).val();
+	        });
+	        var that = this;
+	        $.post('/api/update/bot/delete_message', postData, function(data){
+	        	if (data.status) {
+	        		$(that).hide('slow', function(){ $(this).remove(); });
+	        	}
+	        }, 'JSON');
+ 
+		}
+	});
 });
 </script>
 
@@ -37,10 +125,10 @@ $(function() {
 
 {% block content %}
 
-<div data-role="page" class="type-interior">
+<div id="home" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<form>
+			<form action="/user/home" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
 	        			<label for="name">Quantity:</label>
@@ -74,9 +162,10 @@ $(function() {
 				</ul>
 			</form>
 			
-			<ul style="margin-top: 20px;">
-				<li class="arrow"><a href="/user/bot">Bot Config</a></li>
-				<li class="arrow"><a href="/bot/">Bot Admin</a></li>
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Bot Menu</li>
+				<li><a href="/user/bot">Config</a></li>
+				<li><a href="/bot/">Admin</a></li>
 			</ul>
 
 		</div>

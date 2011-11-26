@@ -7,78 +7,43 @@
 {% block css %}{% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-/*
-$(function() {
-	$('#scr_bot .whiteButton').click(function(){
-		alert('ddd');
-		return;
-	//$('#scr_bot').submit(function(){
-		//$('form').submit();
-		var postData = {};
-        $('#scr_bot').find('select').each(function(){
-            postData[$(this).attr('name')] = $(this).val();
-        });
-        $('#scr_bot').find('input').each(function(){
-            postData[$(this).attr('name')] = $(this).val();
-        });
-        
-        $.post('/api/update/bot', postData, function(data){
-        	if (data.status) {
-        		window.location = "bocc://bocchi.atrac613.io/alert/saved";
-        	}
-        }, 'JSON');
- 
-        return false;
-	});
-});
-function clickclear(thisfield, defaulttext) {
-	if (thisfield.value == defaulttext) {
-		thisfield.value = "";
-	}
-}
-function clickrecall(thisfield, defaulttext) {
-	if (thisfield.value == "") {
-		thisfield.value = defaulttext;
-	}
-}*/
-</script>
 {% endblock %}
 
 {% block content %}
 
-<form id="scr_bot" class="panel" title="Bot" selected="true" onsubmit="alert('ddd');">
-<input type="hidden" name="key" value="{{ key }}" />
-<h2>Status</h2>
-<fieldset>
-    <div class="row">
-    	<label>Bot ID</label>
-        <span>{{ user_prefs.bot_prefs_key.bot_id }}</span>
-    </div>
-    <div class="row">
-    	<label>Nickname</label>
-        <span>{{ user_prefs.bot_prefs_key.nickname }}</span>
-    </div>
-</fieldset>
+<div id="bot" data-role="page" class="type-interior">
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Status</h2>
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li>Bot ID: {{ user_prefs.bot_prefs_key.bot_id }}</li>
+				<li>Nickname: {{ user_prefs.bot_prefs_key.nickname }}</li>
+			</ul>
+			
+			<h2>Choose Bot ID</h2>
+			<form action="/user/bot" method="post" data-ajax="false">
+				<ul data-role="listview" data-inset="true">
+					<li data-role="fieldcontain">
+	        			<label for="select-choice-1" class="select">Bot ID:</label>
+	        			<select name="bot_id" id="select-choice-1">
+							<option value="_custom">Custom</option>
+							{% for row in bot_list %}
+							<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.nickname }}</option>
+							{% endfor %}
+	        			</select>
+					</li>
+					<li data-role="fieldcontain">
+	        			<label>Custom ID:</label>
+	        			<input type="text" name="custom_bot_id" value="" />
+					</li>
+					<li data-role="fieldcontain">
+	        			<button type="submit" data-theme="a">Submit</button
+					</li>
+				</ul>
+			</form>
+			
+		</div>
+	</div>
+</div>
 
-<h2>Choose Bot ID</h2>
-<fieldset>
-    <div class="row">
-    	<label for="bot_id">Bot ID</label>
-        <select name="bot_id" class="panel">
-		<option value="_custom">Custom</option>
-		{% for row in bot_list %}
-		<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.nickname }}</option>
-		{% endfor %}
-	</select>
-    </div>
-    <div class="row">
-    	<label>Custom ID</label>
-        <input type="text" name="custom_bot_id" value="" />
-    </div>
-</fieldset>
-
-<a class="whiteButton" type="submit">Submit</a>
-
-</form>
 {% endblock %}

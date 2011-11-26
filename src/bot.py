@@ -116,6 +116,9 @@ class AddPage(webapp.RequestHandler):
         bot_id = self.request.get('bot_id')
         nickname = self.request.get('nickname')
         
+        if nickname == '':
+            nickname = bot_id
+        
         message = ''
         
         bot_prefs = BotPrefs.all().filter('bot_id =', bot_id).get()

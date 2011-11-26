@@ -1,81 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="description" content="">
-<meta name="format-detection" content="telephone=no">
+{% load i18n %}
 
-<link rel="stylesheet" href="/css/iphone.css" />
+{% extends "../user/base_generic.html" %}
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+{% block title %}Bocchi{% endblock %}
 
-<script language="Javascript" type="text/javascript">
-	google.load("jquery", "1");
-</script>
+{% block css %}{% endblock %}
 
-<script type="text/javascript">
-$(function() {
-	$('#save').click(function(){
-		//$('form').submit();
-		var postData = {};
-        $('form').find('input:hidden').each(function(){
-            postData[$(this).attr('name')] = $(this).val();
-        });
-        $('form').find('input:text').each(function(){
-            postData[$(this).attr('name')] = $(this).val();
-        });
-        $('form').find(':checked').each(function(){
-            postData[$(this).attr('name')] = $(this).val();
-        });
-        
-        $.post('/api/update/bot/edit', postData, function(data){
-        	if (data.status) {
-        		alert('Saved');
-        	}
-        }, 'JSON');
- 
-        return false;
-	});
-	
-	$('form').submit(function(){
-		return false;
-	});
-});
-function clickclear(thisfield, defaulttext) {
-	if (thisfield.value == defaulttext) {
-		thisfield.value = "";
-	}
-}
-function clickrecall(thisfield, defaulttext) {
-	if (thisfield.value == "") {
-		thisfield.value = defaulttext;
-	}
-}
-</script>
+{% block javascript %}
+{% endblock %}
 
-<title>Bot Admin | I miss you. </title>
+{% block content %}
 
-</head>
-<body>
-<h1>Bot</h1>
+<div id="bot_edit" data-role="page" class="type-interior">
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Edit</h2>
+			<form action="/bot/edit" method="post" data-ajax="false">
+				<input type="hidden" name="mode" value="modify" />
+				<input type="hidden" name="bot_id" value="{{ bot_id }}" />
+				<ul data-role="listview" data-inset="true">
+					<li data-role="fieldcontain">
+	        			Bot ID: {{ bot_id }}
+					</li>
+					<li data-role="fieldcontain">
+	        			<label>Nickname:</label>
+	        			<input type="text" name="nickname" value="{{ nickname }}" />
+					</li>
+					<li data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+	        				<legend>Permission:</legend>
+	        				<input type="checkbox" name="public_flg" id="checkbox-1a" class="custom" value="1" {% if public_flg %}checked="checked"{% endif %} />
+							<label for="checkbox-1a">Public</label>
+	        			</fieldset>
+					</li>
+					<li data-role="fieldcontain">
+	        			<button type="submit" data-theme="a">Submit</button
+					</li>
+				</ul>
+			</form>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Menu</li>
+				<li><a href="/bot/schedule_list?bot_id={{ bot_id }}">Schedule List</a></li>
+				<li><a href="/bot/add_message?bot_id={{ bot_id }}">Add Message</a></li>
+			</ul>
 
-<form action="/bot/edit" method="post">
-	<input type="hidden" name="mode" value="modify" />
-	<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-	<ul class="field">
-		<li>Bot ID: {{ bot_id }}</li>
-		<li><input type="text" name="nickname" size="30" value="{{ nickname }}" onclick="clickclear(this, 'Nickname')" onblur="clickrecall(this,'Nickname')" /></li>
-		<li><input type="checkbox" value="1" title="Public" name="public_flg" {% if public_flg %}checked="checked"{% endif %} /></li>
-	</ul>
-	<p><a href="#" id="save" class="button white">Save</a></p>
-</form>
+		</div>
+	</div>
+</div>
 
-<hr />
-
-<ul>
-	<li class="arrow"><a href="/bot/schedule_list?bot_id={{ bot_id }}">Schedule List</a></li>
-	<li class="arrow"><a href="/bot/add_message?bot_id={{ bot_id }}">Add Message</a></li>
-</ul>
-
-</body>
-</html>
+{% endblock %}

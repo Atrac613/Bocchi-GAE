@@ -1,23 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="description" content="">
-<meta name="format-detection" content="telephone=no">
+{% load i18n %}
 
-<link rel="stylesheet" href="/css/iphone.css" />
+{% extends "../user/base_generic.html" %}
 
-<title>Bot Admin | I miss you. </title>
+{% block title %}Bocchi{% endblock %}
 
-</head>
-<body>
-<h1>Bot List</h1>
+{% block css %}{% endblock %}
 
-<ul>
-{% for row in bot_list %}
-	<li class="arrow"><a href="/bot/edit?bot_id={{ row.bot_id }}">{{ row.nickname }}</a></li>
-{% endfor %}
-</ul>
+{% block javascript %}
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<div id="bot_list" data-role="page" class="type-interior">
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Create</h2>
+			
+			<ul data-role="listview" data-inset="true">
+			{% for row in bot_list %}
+				<li><a href="/bot/edit?bot_id={{ row.bot_id }}">{{ row.nickname }}</a></li>
+			{% endfor %}
+			</ul>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -236,6 +236,8 @@ class UpdateBotAddMessageAPI(webapp.RequestHandler):
             time = self.request.get('time')
             message = self.request.get('message')
             
+            logging.info('time: %s' % time)
+            
             bot_message = BotMessage()
             bot_message.bot_prefs_key = bot_prefs.key()
             bot_message.time = time
