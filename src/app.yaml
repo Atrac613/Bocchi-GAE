@@ -23,6 +23,10 @@ handlers:
 - url: /user/home
   login: required
   script: user.py
+
+- url: /user/auth
+  login: required
+  script: user.py
   
 - url: /user/.*
   script: user.py

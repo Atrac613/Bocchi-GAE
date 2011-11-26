@@ -24,24 +24,70 @@ from i18NRequestHandler import I18NRequestHandler
 class WelcomePage(I18NRequestHandler):
     def get(self):
         
-        #device_token = self.request.get('device_token')
-        #if device_token == '':
-        #    return self.error(404)
-        
-        signup = self.request.get('signup')
-        
+        user = users.get_current_user()
+        if user:
+            user_prefs = UserPrefs.all().filter('google_account =', user).get()
+            if user_prefs is not None:
+                return self.redirect('/user/home')
+                
         template_values = {
-            #'device_token': device_token,
-            'signup': signup
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/user/welcome.html')
         self.response.out.write(template.render(path, template_values))
 
+class AuthPage(webapp.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user is not None:
+            return self.redirect('/user/auth/update')
+        
+        self.redirect('/user/auth/update?login=false')
+
+class AuthUpdatePage(webapp.RequestHandler):
+    def get(self):
+        
+        login = self.request.get('login')
+        
+        template_values = {
+            'login': login
+        }
+        
+        path = os.path.join(os.path.dirname(__file__), 'templates/user/auth.html')
+        self.response.out.write(template.render(path, template_values))
+
     def post(self):
         
-        login_url = users.create_login_url('/user/welcome?signup=true')
-        self.redirect(login_url)
+        user = users.get_current_user()
+        
+        device_token = self.request.get('device_token')
+        if device_token != '':
+            logging.info('device_token: %s' % device_token)
+            
+            device_prefs = DevicePrefs.all().filter('device_token =', device_token).get()
+            if device_prefs is None:
+                device_prefs = DevicePrefs()
+                device_prefs.google_account = user
+                device_prefs.device_token = device_token
+                device_prefs.delete_flg = False
+                device_prefs.put()
+                
+            user_prefs = UserPrefs.all().filter('google_account =', user).get()
+            if user_prefs is None:
+                bot = BotPrefs.all().filter('bot_id =', 'test').get()
+                
+                user_prefs = UserPrefs()
+                user_prefs.google_account = user
+                user_prefs.daily_max_notify_count = 3
+                user_prefs.paid_quantity = 0
+                user_prefs.free_quantity = 100
+                user_prefs.timezone = 0.0
+                user_prefs.notify_probability = 0.0
+                user_prefs.delete_flg = False
+                user_prefs.bot_prefs_key = bot.key()
+                user_prefs.put()
+            
+        self.redirect('/user/auth/update?login=true')
         
 class HomePage(webapp.RequestHandler):
     def get(self):
@@ -122,6 +168,8 @@ class BotPage(webapp.RequestHandler):
         
 application = webapp.WSGIApplication(
                                      [('/user/welcome', WelcomePage),
+                                      ('/user/auth', AuthPage),
+                                      ('/user/auth/update', AuthUpdatePage),
                                       ('/user/home', HomePage),
                                       ('/user/bot', BotPage)],
                                      debug=True)
