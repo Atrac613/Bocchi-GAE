@@ -14,13 +14,13 @@
 <div id="bot" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Status</h2>
+			<h2>Current Bot</h2>
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li>Bot ID: {{ user_prefs.bot_prefs_key.bot_id }}</li>
-				<li>Nickname: {{ user_prefs.bot_prefs_key.nickname }}</li>
+				<li>Bot ID: <span id="current_bot_id">{{ user_prefs.bot_prefs_key.bot_id }}</span></li>
+				<li>Nickname: <span id="current_bot_nickname">{{ user_prefs.bot_prefs_key.nickname }}</span></li>
 			</ul>
 			
-			<h2>Choose Bot ID</h2>
+			<h2>Choose Bot</h2>
 			<form action="/user/bot" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
@@ -33,8 +33,8 @@
 	        			</select>
 					</li>
 					<li data-role="fieldcontain">
-	        			<label>Custom ID:</label>
-	        			<input type="text" name="custom_bot_id" value="" />
+	        			<label for="input-1" class="input">Custom Bot ID:</label>
+	        			<input type="text" name="custom_bot_id" id="input-1" value="" />
 					</li>
 					<li data-role="fieldcontain">
 	        			<button type="button" data-theme="a">Submit</button

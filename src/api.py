@@ -189,10 +189,13 @@ class UpdateBotAPI(webapp.RequestHandler):
         if bot is not None:
             user_prefs.bot_prefs_key = bot.key()
             user_prefs.put()
+            
+            data = {'status': True, 'bot_id': bot.bot_id, 'nickname': bot.nickname}
         else:
             logging.error('bot_id is invalid.')
+            data = {'status': False}
             
-        json = simplejson.dumps({'status': True}, ensure_ascii=False)
+        json = simplejson.dumps(data, ensure_ascii=False)
         self.response.content_type = 'application/json'
         self.response.out.write(json)
         

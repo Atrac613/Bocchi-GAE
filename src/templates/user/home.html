@@ -43,6 +43,9 @@ $(function() {
         $.post('/api/update/bot', postData, function(data){
         	if (data.status) {
         		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
+        		
+        		$('#current_bot_id').text(data.bot_id);
+        		$('#current_bot_nickname').text(data.nickname);
         	}
         }, 'JSON');
  
@@ -165,9 +168,31 @@ $(function() {
 					<li data-role="fieldcontain">
 	        			<fieldset data-role="controlgroup">
 	        				<legend>{% trans "Schedule" %}:</legend>
-	        				<input type="checkbox" name="checkbox-0000_0300" id="checkbox-1a" class="custom" value="1" />
+	        				<input type="checkbox" name="0000_0300" id="checkbox-1a" class="custom" value="1" {% if user_prefs.schedule_0000_0300 %}checked="checked"{% endif %} />
 							<label for="checkbox-1a">00:00 - 03:00</label>
-	        			</fieldset>
+	        			
+	        				<input type="checkbox" name="0300_0600" id="checkbox-2a" class="custom" value="1" {% if user_prefs.schedule_0300_0600 %}checked="checked"{% endif %} />
+							<label for="checkbox-2a">03:00 - 06:00</label>
+							
+							<input type="checkbox" name="0600_0900" id="checkbox-3a" class="custom" value="1" {% if user_prefs.schedule_0600_0900 %}checked="checked"{% endif %} />
+							<label for="checkbox-3a">06:00 - 09:00</label>
+							
+							<input type="checkbox" name="0900_1200" id="checkbox-4a" class="custom" value="1" {% if user_prefs.schedule_0900_1200 %}checked="checked"{% endif %} />
+							<label for="checkbox-4a">09:00 - 12:00</label>
+							
+							<input type="checkbox" name="1200_1500" id="checkbox-5a" class="custom" value="1" {% if user_prefs.schedule_1200_1500 %}checked="checked"{% endif %} />
+							<label for="checkbox-5a">12:00 - 15:00</label>
+							
+							<input type="checkbox" name="1500_1800" id="checkbox-6a" class="custom" value="1" {% if user_prefs.schedule_1500_1800 %}checked="checked"{% endif %} />
+							<label for="checkbox-6a">15:00 - 18:00</label>
+							
+							<input type="checkbox" name="1800_2100" id="checkbox-7a" class="custom" value="1" {% if user_prefs.schedule_1800_2100 %}checked="checked"{% endif %} />
+							<label for="checkbox-7a">18:00 - 21:00</label>
+							
+							<input type="checkbox" name="2100_2400" id="checkbox-8a" class="custom" value="1" {% if user_prefs.schedule_2100_2400 %}checked="checked"{% endif %} />
+							<label for="checkbox-8a">21:00 - 24:00</label>
+							
+						</fieldset>
 					</li>
 					<li data-role="fieldcontain">
 	        			<label for="select-choice-1" class="select">{% trans 'Timezone' %}:</label>
@@ -183,9 +208,10 @@ $(function() {
 			</form>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Bot Menu</li>
-				<li><a href="/user/bot">Config</a></li>
-				<li><a href="/bot/">Admin</a></li>
+				<li data-role="list-divider">Menu</li>
+				<li><a href="/store/">Store</a></li>
+				<li><a href="/user/bot">Bot Config</a></li>
+				<li><a href="/bot/">Bot Admin</a></li>
 			</ul>
 
 		</div>
