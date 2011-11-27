@@ -49,3 +49,10 @@ class BotMessage(db.Model):
     message = db.StringProperty()
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now_add=True)
+    
+class StoreTweet(db.Model):
+    google_account = db.UserProperty()
+    expired_at = db.DateTimeProperty()
+    created_at = db.DateTimeProperty(auto_now_add=True)
+    updated_at = db.DateTimeProperty(auto_now_add=True)
+    

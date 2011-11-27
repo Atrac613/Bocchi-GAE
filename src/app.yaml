@@ -35,6 +35,10 @@ handlers:
   login: required
   script: api.py
   
+- url: /store/.*
+  login: required
+  script: store.py
+  
 - url: /cron/.*
   login: admin
   script: cron.py

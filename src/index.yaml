@@ -22,3 +22,8 @@ indexes:
   - name: time
   - name: created_at
     direction: desc
+
+- kind: StoreTweet
+  properties:
+  - name: google_account
+  - name: expired_at

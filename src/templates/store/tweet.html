@@ -1,0 +1,32 @@
+{% load i18n %}
+
+{% extends "../user/base_generic.html" %}
+
+{% block title %}Bocchi{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+
+<div id="store_tweet" data-role="page" class="type-interior">
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Add by Tweet</h2>
+			
+			<p>Add notification count by tweet at once a week.</p>
+			
+			{% if can_tweet %}
+				<button type="button" id="tweet">Tweet</button>
+			{% else %}
+				<p>You can not tweet.</p>
+				<p>Expired at: {{ expired_at }}</p>
+			{% endif %}
+			
+		</div>
+	</div>
+</div>
+
+{% endblock %}

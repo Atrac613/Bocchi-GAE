@@ -141,6 +141,18 @@ $(function() {
  
 		}
 	});
+	
+	$('#store_tweet button').live('click', function(){
+		var that = this;
+		$.post('/api/store/tweet', {}, function(data){
+        	if (data.status) {
+        		//$(that).hide('slow', function(){ $(this).remove(); });
+        		window.location = "bocchi://bocchi.atrac613.io/store/tweet";
+        	}else{
+        		alert('Fail');
+        	}
+        }, 'JSON');
+	});
 });
 </script>
 
