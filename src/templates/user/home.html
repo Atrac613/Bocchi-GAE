@@ -9,7 +9,11 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	$('#home').live('submit', function(){
+	$('form').live('submit', function(){
+		return false;
+	});
+	
+	$('#home button').live('click', function(){
 		var postData = {};
         $('form').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -27,7 +31,7 @@ $(function() {
         return false;
 	});
 	
-	$('#bot').live('submit', function(){
+	$('#bot button').live('click', function(){
 		var postData = {};
         $('form').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -45,18 +49,34 @@ $(function() {
         return false;
 	});
 	
-	$('#bot_create').live('submit', function(){
+	$('#bot_create button').live('click', function(){
 		var bot_id = $('#bot_id').val();
-		if(!bot_id.match( /[^0-9A-Za-z]+/ )){
-			$('#bot_create form').submit();
+		if(bot_id){
+			if(!bot_id.match( /[^0-9A-Za-z]+/ )){
+				var postData = {};
+		        $('form').find('input').each(function(){
+		            postData[$(this).attr('name')] = $(this).val();
+		        });
+		        
+		        $.post('/api/update/bot/add', postData, function(data){
+		        	if (data.status) {
+		        		//window.location = "bocchi://bocchi.atrac613.io/alert/saved";
+		        		$.mobile.changePage("/bot/list", 'slideup');
+		        	}
+		        }, 'JSON');
+		 
+		        return false;
+			}else{
+				alert("Bot ID is only alphanumeric character.");
+			}
 		}else{
-			alert("Bot ID is only alphanumeric character.");
+			alert('Bot ID is required.');
 		}
  
         return false;
 	});
 	
-	$('#bot_edit').live('submit', function(){
+	$('#bot_edit button').live('click', function(){
 		var postData = {};
         $('form').find('input:hidden').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -77,7 +97,7 @@ $(function() {
         return false;
 	});
 	
-	$('#bot_add_message').live('submit', function(){
+	$('#bot_add_message button').live('click', function(){
 		var postData = {};
         $('form').find('input:hidden').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -157,7 +177,7 @@ $(function() {
 	        			</select>
 					</li>
 					<li data-role="fieldcontain">
-	        			<button type="submit" data-theme="a">Submit</button
+	        			<button type="button" data-theme="a">Submit</button
 					</li>
 				</ul>
 			</form>

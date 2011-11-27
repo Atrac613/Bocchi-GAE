@@ -196,6 +196,44 @@ class UpdateBotAPI(webapp.RequestHandler):
         self.response.content_type = 'application/json'
         self.response.out.write(json)
         
+class UpdateBotAddAPI(webapp.RequestHandler):
+    def post(self):
+        user = users.get_current_user()
+        
+        bot_id = self.request.get('bot_id')
+        nickname = self.request.get('nickname')
+        
+        if nickname == '':
+            nickname = bot_id
+        
+        message = ''
+        
+        bot_prefs = BotPrefs.all().filter('bot_id =', bot_id).get()
+        if bot_prefs is not None:
+            message = '%s is already exists.' % bot_id
+            data = {'status': False, 'message': message}
+        else:
+            bot_prefs = BotPrefs()
+            bot_prefs.google_account = user
+            bot_prefs.bot_id = bot_id
+            bot_prefs.nickname = nickname
+            bot_prefs.public_flg = False
+            bot_prefs.delete_flg = False
+            bot_prefs.put()
+            
+            data = {'status': True, 'message': None}
+            
+        
+        template_values = {
+            'bot_id': bot_id,
+            'nickname': nickname,
+            'message': message
+        }
+        
+        json = simplejson.dumps(data, ensure_ascii=False)
+        self.response.content_type = 'application/json'
+        self.response.out.write(json)
+        
 class UpdateBotEditAPI(webapp.RequestHandler):
     def post(self):
         user = users.get_current_user()
@@ -273,6 +311,7 @@ class UpdateBotDeleteMessageAPI(webapp.RequestHandler):
 application = webapp.WSGIApplication(
                                      [('/api/update/user_prefs', UpdateUserPrefsAPI),
                                       ('/api/update/bot', UpdateBotAPI),
+                                      ('/api/update/bot/add', UpdateBotAddAPI),
                                       ('/api/update/bot/edit', UpdateBotEditAPI),
                                       ('/api/update/bot/add_message', UpdateBotAddMessageAPI),
                                       ('/api/update/bot/delete_message', UpdateBotDeleteMessageAPI)],

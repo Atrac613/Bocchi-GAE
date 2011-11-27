@@ -110,41 +110,6 @@ class AddPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/add.html')
         self.response.out.write(template.render(path, template_values))
     
-    def post(self):
-        user = users.get_current_user()
-        
-        bot_id = self.request.get('bot_id')
-        nickname = self.request.get('nickname')
-        
-        if nickname == '':
-            nickname = bot_id
-        
-        message = ''
-        
-        bot_prefs = BotPrefs.all().filter('bot_id =', bot_id).get()
-        if bot_prefs is not None:
-            message = '%s is already exists.' % bot_id
-        else:
-            bot_prefs = BotPrefs()
-            bot_prefs.google_account = user
-            bot_prefs.bot_id = bot_id
-            bot_prefs.nickname = nickname
-            bot_prefs.public_flg = False
-            bot_prefs.delete_flg = False
-            bot_prefs.put()
-            
-            return self.redirect('/bot/list')
-        
-        template_values = {
-            'bot_id': bot_id,
-            'nickname': nickname,
-            'message': message
-        }
-        
-        path = os.path.join(os.path.dirname(__file__), 'templates/bot/add.html')
-        self.response.out.write(template.render(path, template_values))
-    
-
 application = webapp.WSGIApplication(
                                      [('/bot/', HomePage),
                                       ('/bot/add', AddPage),
