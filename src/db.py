@@ -56,3 +56,19 @@ class StoreTweet(db.Model):
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now_add=True)
     
+class StorePurchaseHistory(db.Model):
+    user_prefs = db.ReferenceProperty(UserPrefs)
+    platform = db.StringProperty()
+    product_id = db.StringProperty()
+    receipt = db.TextProperty()
+    status = db.StringProperty()
+    created_at = db.DateTimeProperty(auto_now_add=True)
+    
+class StorePurchaseTmpHistory(db.Model):
+    user_prefs = db.ReferenceProperty(UserPrefs)
+    platform = db.StringProperty()
+    receipt_data = db.TextProperty()
+    status = db.StringProperty()
+    secret_key = db.StringProperty()
+    created_at = db.DateTimeProperty(auto_now_add=True)
+    

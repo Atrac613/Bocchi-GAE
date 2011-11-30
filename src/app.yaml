@@ -46,6 +46,16 @@ handlers:
 - url: /task/.*
   login: admin
   script: task.py
+  
+- url: /store_api/task/.*
+  secure: always
+  login: admin
+  script: store_api_task.py
+
+- url: /store_api/.*
+  secure: always
+  login: required
+  script: store_api.py
 
 - url: /.*
   script: main.py

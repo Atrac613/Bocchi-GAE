@@ -153,6 +153,14 @@ $(function() {
         	}
         }, 'JSON');
 	});
+	
+	$('#store_buy button').live('click', function(){
+		location.href = 'bocchi://bocchi.atrac613.io/item/io.atrac613.Bocchi.store.push150';
+	});
+	
+	$('#store_buy').live('pageshow',function(event){
+		location.href = 'bocchi://bocchi.atrac613.io/store/view/io.atrac613.Bocchi.store.push150';
+	});
 });
 </script>
 

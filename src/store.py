@@ -60,10 +60,20 @@ class TweetPage(I18NRequestHandler):
         
         path = os.path.join(os.path.dirname(__file__), 'templates/store/tweet.html')
         self.response.out.write(template.render(path, template_values))
+        
+class BuyPage(I18NRequestHandler):
+    def get(self):
+        
+        template_values = {
+        }
+        
+        path = os.path.join(os.path.dirname(__file__), 'templates/store/buy.html')
+        self.response.out.write(template.render(path, template_values))
  
 application = webapp.WSGIApplication(
                                      [('/store/', HomePage),
-                                      ('/store/tweet', TweetPage)],
+                                      ('/store/tweet', TweetPage),
+                                      ('/store/buy', BuyPage)],
                                      debug=True)
 
 def main():
