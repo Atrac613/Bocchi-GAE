@@ -84,7 +84,10 @@ class AuthUpdatePage(webapp.RequestHandler):
                 user_prefs.timezone = 0.0
                 user_prefs.notify_probability = 0.0
                 user_prefs.delete_flg = False
-                user_prefs.bot_prefs_key = bot.key()
+                
+                if bot is not None:
+                    user_prefs.bot_prefs_key = bot.key()
+                    
                 user_prefs.put()
             
         self.redirect('/user/auth/update?login=true')

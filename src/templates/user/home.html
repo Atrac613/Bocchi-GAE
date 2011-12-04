@@ -13,6 +13,14 @@ $(function() {
 		return false;
 	});
 	
+	$('#home').live('pageshow',function(event){
+		location.href = 'bocchi://bocchi.atrac613.io/hide/back_button';
+	});
+	
+	$('#home').live('pagehide',function(event){
+		location.href = 'bocchi://bocchi.atrac613.io/show/back_button';
+	});
+	
 	$('#home button').live('click', function(){
 		var postData = {};
         $('form').find('select').each(function(){
