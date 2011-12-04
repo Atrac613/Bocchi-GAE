@@ -22,6 +22,8 @@ $(function() {
 	});
 	
 	$('#home button').live('click', function(){
+		$.mobile.showPageLoadingMsg();
+		
 		var postData = {};
         $('form').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -31,6 +33,8 @@ $(function() {
         });
         
         $.post('/api/update/user_prefs', postData, function(data){
+        	$.mobile.hidePageLoadingMsg();
+        	
         	if (data.status) {
         		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
         	}
@@ -40,6 +44,8 @@ $(function() {
 	});
 	
 	$('#bot button').live('click', function(){
+		$.mobile.showPageLoadingMsg();
+		
 		var postData = {};
         $('form').find('select').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -49,6 +55,8 @@ $(function() {
         });
         
         $.post('/api/update/bot', postData, function(data){
+        	$.mobile.hidePageLoadingMsg();
+        	
         	if (data.status) {
         		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
         		
@@ -64,12 +72,16 @@ $(function() {
 		var bot_id = $('#bot_id').val();
 		if(bot_id){
 			if(!bot_id.match( /[^0-9A-Za-z]+/ )){
+				$.mobile.showPageLoadingMsg();
+				
 				var postData = {};
 		        $('form').find('input').each(function(){
 		            postData[$(this).attr('name')] = $(this).val();
 		        });
 		        
 		        $.post('/api/update/bot/add', postData, function(data){
+		        	$.mobile.hidePageLoadingMsg();
+		        	
 		        	if (data.status) {
 		        		//window.location = "bocchi://bocchi.atrac613.io/alert/saved";
 		        		$.mobile.changePage("/bot/list", 'slideup');
@@ -88,6 +100,8 @@ $(function() {
 	});
 	
 	$('#bot_edit button').live('click', function(){
+		$.mobile.showPageLoadingMsg();
+		
 		var postData = {};
         $('form').find('input:hidden').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -100,6 +114,8 @@ $(function() {
         });
         
         $.post('/api/update/bot/edit', postData, function(data){
+        	$.mobile.hidePageLoadingMsg();
+        	
         	if (data.status) {
         		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
         	}
@@ -109,6 +125,8 @@ $(function() {
 	});
 	
 	$('#bot_add_message button').live('click', function(){
+		$.mobile.showPageLoadingMsg();
+		
 		var postData = {};
         $('form').find('input:hidden').each(function(){
             postData[$(this).attr('name')] = $(this).val();
@@ -123,6 +141,8 @@ $(function() {
         var bot_id = $("#bot_id").val();
         
         $.post('/api/update/bot/add_message', postData, function(data){
+        	$.mobile.hidePageLoadingMsg();
+        	
         	if (data.status) {
         		$.mobile.changePage("/bot/schedule_list?bot_id=" + bot_id, 'slideup');
         		//window.location = "/bot/schedule_list?bot_id=" + bot_id;
