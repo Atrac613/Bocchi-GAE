@@ -10,6 +10,8 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext import db
 from google.appengine.api import users
 
+import pytz
+
 from db import UserPrefs
 from db import DevicePrefs
 from db import BotPrefs
@@ -81,7 +83,7 @@ class AuthUpdatePage(webapp.RequestHandler):
                 user_prefs.daily_max_notify_count = 3
                 user_prefs.paid_quantity = 0
                 user_prefs.free_quantity = 100
-                user_prefs.timezone = 0.0
+                user_prefs.timezone = 'Asia/Tokyo'
                 user_prefs.notify_probability = 0.0
                 user_prefs.delete_flg = False
                 
@@ -103,12 +105,21 @@ class HomePage(webapp.RequestHandler):
         
         quantity = user_prefs.free_quantity + user_prefs.paid_quantity
         
-        max_notify_list = [3, 5, 10, 15, 20]
+        try:
+            bot_id = user_prefs.bot_prefs_key.bot_id
+            bot_nickname = user_prefs.bot_prefs_key.nickname
+        except:
+            bot_id = '-'
+            bot_nickname = 'Not found'
+        
+        logout_url = users.create_logout_url('/user/welcome')
         
         template_values = {
             'quantity': quantity,
             'user_prefs': user_prefs,
-            'max_notify_list': max_notify_list
+            'bot_id': bot_id,
+            'bot_nickname': bot_nickname,
+            'logout_url': logout_url
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/user/home.html')
@@ -149,6 +160,26 @@ class HomePage(webapp.RequestHandler):
             
         self.redirect('/user/home')
         
+class SettingsPage(webapp.RequestHandler):
+    def get(self):
+        
+        user = users.get_current_user()
+        
+        user_prefs = UserPrefs.all().filter('google_account =', user).get()
+        if user_prefs is None:
+            return self.redirect('/user/welcome')
+        
+        max_notify_list = [3, 5, 10, 15, 20]
+        
+        template_values = {
+            'user_prefs': user_prefs,
+            'max_notify_list': max_notify_list,
+            'timezones': pytz.common_timezones
+        }
+        
+        path = os.path.join(os.path.dirname(__file__), 'templates/user/settings.html')
+        self.response.out.write(template.render(path, template_values))
+        
 class BotPage(webapp.RequestHandler):
     def get(self):
         
@@ -158,11 +189,23 @@ class BotPage(webapp.RequestHandler):
         if user_prefs is None:
             return self.redirect('/user/welcome')
         
+        new_bot_list = []
+        bot_id_list = []
         
         bot_list = BotPrefs.all().filter('public_flg =', True).fetch(20)
+        for row in bot_list:
+            if row.bot_id not in bot_id_list:
+                bot_id_list.append(row.bot_id)
+                new_bot_list.append({'bot_id': row.bot_id, 'nickname': row.nickname})
         
+        bot_list = BotPrefs.all().filter('google_account =', user).fetch(20)
+        for row in bot_list:
+            if row.bot_id not in bot_id_list:
+                bot_id_list.append(row.bot_id)
+                new_bot_list.append({'bot_id': row.bot_id, 'nickname': row.nickname})
+                
         template_values = {
-            'bot_list': bot_list,
+            'bot_list': new_bot_list,
             'user_prefs': user_prefs
         }
         
@@ -173,6 +216,7 @@ application = webapp.WSGIApplication(
                                      [('/user/welcome', WelcomePage),
                                       ('/user/auth', AuthPage),
                                       ('/user/auth/update', AuthUpdatePage),
+                                      ('/user/settings', SettingsPage),
                                       ('/user/home', HomePage),
                                       ('/user/bot', BotPage)],
                                      debug=True)

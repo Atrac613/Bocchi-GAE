@@ -22,6 +22,10 @@ $(function() {
 	});
 	
 	$('#home button').live('click', function(){
+		window.location = "{{ logout_url }}";
+	});
+	
+	$('#settings button').live('click', function(){
 		$.mobile.showPageLoadingMsg();
 		
 		var postData = {};
@@ -62,6 +66,8 @@ $(function() {
         		
         		$('#current_bot_id').text(data.bot_id);
         		$('#current_bot_nickname').text(data.nickname);
+        	} else {
+        		alert(data.message);
         	}
         }, 'JSON');
  
@@ -171,15 +177,7 @@ $(function() {
 	});
 	
 	$('#store_tweet button').live('click', function(){
-		var that = this;
-		$.post('/api/store/tweet', {}, function(data){
-        	if (data.status) {
-        		//$(that).hide('slow', function(){ $(this).remove(); });
-        		window.location = "bocchi://bocchi.atrac613.io/store/tweet";
-        	}else{
-        		alert('Fail');
-        	}
-        }, 'JSON');
+		window.location = "bocchi://bocchi.atrac613.io/store/tweet";
 	});
 	
 	$('#store_buy button').live('click', function(){
@@ -189,7 +187,26 @@ $(function() {
 	$('#store_buy').live('pageshow',function(event){
 		location.href = 'bocchi://bocchi.atrac613.io/store/view/io.atrac613.Bocchi.store.push150';
 	});
+	
+	$('#store_tweet_success button').live('click', function(){
+		$.mobile.changePage('/user/home', {transition: 'slideup', reloadPage: true});
+	});
+	
+	$('#store_buy_success button').live('click', function(){
+		$.mobile.changePage('/user/home', {transition: 'slideup', reloadPage: true});
+	});
 });
+
+function updateNotificationCount(){
+	$.post('/api/store/tweet', {}, function(data){
+    	if (data.status) {
+    		$.mobile.changePage('/store/tweet/success', 'slideup');
+    	}else{
+    		alert('Fail');
+    	}
+    }, 'JSON');
+}
+
 </script>
 
 {% endblock %}
@@ -199,69 +216,30 @@ $(function() {
 <div id="home" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
+			<h2>Hi! {{ user_prefs.google_account.nickname }}.</h2>
 			<form action="/user/home" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
-	        			<label for="name">Quantity:</label>
+	        			<label for="name">Bot :</label>
+	        			{{ bot_nickname }} (ID: {{ bot_id }})
+					</li>
+					<li data-role="fieldcontain">
+	        			<label for="name">Quantity :</label>
 	        			{{ quantity }}
-					</li>
-					<li data-role="fieldcontain">
-	        			<label for="select-choice-1" class="select">{% trans "Daily Max Notify Count" %}:</label>
-	        			<select name="daily_max_notify_count" id="select-choice-1">
-	        				{% for i in max_notify_list %}
-								<option value="{{ i }}" {% ifequal i user_prefs.daily_max_notify_count %} selected="selected"{% endifequal %}>{{ i }}</option>
-							{% endfor %}
-	        			</select>
-					</li>
-					<li data-role="fieldcontain">
-	        			<fieldset data-role="controlgroup">
-	        				<legend>{% trans "Schedule" %}:</legend>
-	        				<input type="checkbox" name="0000_0300" id="checkbox-1a" class="custom" value="1" {% if user_prefs.schedule_0000_0300 %}checked="checked"{% endif %} />
-							<label for="checkbox-1a">00:00 - 03:00</label>
-	        			
-	        				<input type="checkbox" name="0300_0600" id="checkbox-2a" class="custom" value="1" {% if user_prefs.schedule_0300_0600 %}checked="checked"{% endif %} />
-							<label for="checkbox-2a">03:00 - 06:00</label>
-							
-							<input type="checkbox" name="0600_0900" id="checkbox-3a" class="custom" value="1" {% if user_prefs.schedule_0600_0900 %}checked="checked"{% endif %} />
-							<label for="checkbox-3a">06:00 - 09:00</label>
-							
-							<input type="checkbox" name="0900_1200" id="checkbox-4a" class="custom" value="1" {% if user_prefs.schedule_0900_1200 %}checked="checked"{% endif %} />
-							<label for="checkbox-4a">09:00 - 12:00</label>
-							
-							<input type="checkbox" name="1200_1500" id="checkbox-5a" class="custom" value="1" {% if user_prefs.schedule_1200_1500 %}checked="checked"{% endif %} />
-							<label for="checkbox-5a">12:00 - 15:00</label>
-							
-							<input type="checkbox" name="1500_1800" id="checkbox-6a" class="custom" value="1" {% if user_prefs.schedule_1500_1800 %}checked="checked"{% endif %} />
-							<label for="checkbox-6a">15:00 - 18:00</label>
-							
-							<input type="checkbox" name="1800_2100" id="checkbox-7a" class="custom" value="1" {% if user_prefs.schedule_1800_2100 %}checked="checked"{% endif %} />
-							<label for="checkbox-7a">18:00 - 21:00</label>
-							
-							<input type="checkbox" name="2100_2400" id="checkbox-8a" class="custom" value="1" {% if user_prefs.schedule_2100_2400 %}checked="checked"{% endif %} />
-							<label for="checkbox-8a">21:00 - 24:00</label>
-							
-						</fieldset>
-					</li>
-					<li data-role="fieldcontain">
-	        			<label for="select-choice-1" class="select">{% trans 'Timezone' %}:</label>
-	        			<select name="timezone" id="select-choice-1">
-	        				<option value="9">Japan (GMT +0900)</option>
-							<option value="-6">US (GMT -0600)</option>
-	        			</select>
-					</li>
-					<li data-role="fieldcontain">
-	        			<button type="button" data-theme="a">Submit</button
 					</li>
 				</ul>
 			</form>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
 				<li data-role="list-divider">Menu</li>
-				<li><a href="/store/">Store</a></li>
-				<li><a href="/user/bot">Bot Config</a></li>
-				<li><a href="/bot/">Bot Admin</a></li>
+				<li><a href="/user/settings">Notification Settings</a></li>
+				<li><a href="/user/bot">Bot Settings</a></li>
+				<li><a href="/store/">Notification Store</a></li>
 			</ul>
-
+			
+			<div style="margin-top: 40px;">
+				<button type="button">Logout</button>
+			</div>
 		</div>
 	</div>
 </div>

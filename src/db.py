@@ -26,7 +26,7 @@ class UserPrefs(db.Model):
     schedule_1500_1800 = db.BooleanProperty()
     schedule_1800_2100 = db.BooleanProperty()
     schedule_2100_2400 = db.BooleanProperty()
-    timezone = db.FloatProperty()
+    timezone = db.StringProperty()
     free_quantity = db.IntegerProperty()
     paid_quantity = db.IntegerProperty()
     bot_prefs_key = db.ReferenceProperty(BotPrefs)
@@ -50,7 +50,7 @@ class BotMessage(db.Model):
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now_add=True)
     
-class StoreTweet(db.Model):
+class StoreTweetHistory(db.Model):
     google_account = db.UserProperty()
     expired_at = db.DateTimeProperty()
     created_at = db.DateTimeProperty(auto_now_add=True)

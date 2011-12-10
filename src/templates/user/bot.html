@@ -14,13 +14,7 @@
 <div id="bot" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Current Bot</h2>
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li>Bot ID: <span id="current_bot_id">{{ user_prefs.bot_prefs_key.bot_id }}</span></li>
-				<li>Nickname: <span id="current_bot_nickname">{{ user_prefs.bot_prefs_key.nickname }}</span></li>
-			</ul>
-			
-			<h2>Choose Bot</h2>
+			<h2>Bot Settings</h2>
 			<form action="/user/bot" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
@@ -28,7 +22,7 @@
 	        			<select name="bot_id" id="select-choice-1">
 							<option value="_custom">Custom</option>
 							{% for row in bot_list %}
-							<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.nickname }}</option>
+							<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.bot_id }}</option>
 							{% endfor %}
 	        			</select>
 					</li>
@@ -41,6 +35,12 @@
 					</li>
 				</ul>
 			</form>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Bot Menu</li>
+				<li><a href="/bot/add">Create</a></li>
+				<li><a href="/bot/list">List</a></li>
+			</ul>
 			
 		</div>
 	</div>
