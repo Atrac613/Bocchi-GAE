@@ -16,6 +16,8 @@ from google.appengine.api import urlfetch
 from google.appengine.api import taskqueue
 
 from django.utils import simplejson
+from pytz import timezone
+import pytz
 
 from db import BotPrefs
 from db import BotMessage
@@ -75,7 +77,7 @@ class SendNotifyTask(webapp.RequestHandler):
             logging.error('quantity is invalid.')
             return
         
-        date = datetime.datetime.now() + datetime.timedelta(hours=user_prefs.timezone)
+        date = datetime.datetime.now(tz=timezone(user_prefs.timezone))
         logging.info('Date: %s' % date)
         hour = date.hour
         logging.info('Hour: %d' % hour)

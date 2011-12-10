@@ -23,7 +23,7 @@ indexes:
   - name: created_at
     direction: desc
 
-- kind: StoreTweet
+- kind: StoreTweetHistory
   properties:
   - name: google_account
   - name: expired_at
