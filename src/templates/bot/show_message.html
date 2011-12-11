@@ -19,6 +19,8 @@
 			<p>{{ bot_message.message }}</p>
 			
 			<form action="/bot/schedule_list" method="post">
+			<input type="hidden" name="advance" value="{{ advance_flg }}" />
+			<input type="hidden" name="hour" value="{{ hour }}" />
 			<input type="hidden" name="mode" value="delete_message" />
 			<input type="hidden" name="bot_id" id="bot_id" value="{{ bot_id }}" />
 			<input type="hidden" name="message_id" value="{{ bot_message.key.id }}" />

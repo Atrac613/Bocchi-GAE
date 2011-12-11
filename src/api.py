@@ -321,11 +321,30 @@ class UpdateBotDeleteMessageAPI(webapp.RequestHandler):
         mode = self.request.get('mode')
         if mode == 'delete_message':
             message_id = self.request.get('message_id')
-            
             bot_message = BotMessage.get_by_id(int(message_id))
+                
             if bot_message is not None:
-                bot_message.delete()
-        
+                advance_flg = self.request.get('advance')
+                if advance_flg == 'True':
+                    bot_message.delete()
+                else:
+                    try:
+                        hour = int(self.request.get('hour'))
+                        
+                        for i in range(3):
+                            time = '%02d00-%02d00' % (hour, hour + 1)
+                            
+                            bot_message_list = BotMessage.all().filter('time =', time).filter('message =', bot_message.message).fetch(20)
+                            if bot_message_list is not None:
+                                for row in bot_message_list:
+                                    logging.info('Delete: %s -> %s' % (time, bot_message.message))
+                                    row.delete()
+                            
+                            hour = hour + 1
+                            
+                    except:
+                        pass
+                
         json = simplejson.dumps({'status': True}, ensure_ascii=False)
         self.response.content_type = 'application/json'
         self.response.out.write(json)
