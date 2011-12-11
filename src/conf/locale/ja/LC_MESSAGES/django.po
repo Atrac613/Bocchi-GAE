@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-11 14:06+0900\n"
+"POT-Creation-Date: 2011-12-11 19:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "作成"
 msgid "Nickname"
 msgstr "ニックネーム"
 
-#: templates/bot/add.html:30 templates/bot/add_message.html:40
+#: templates/bot/add.html:30 templates/bot/add_message.html:35
 #: templates/bot/edit.html:39 templates/user/bot.html:34
 #: templates/user/settings.html:66
 msgid "Submit"
@@ -48,7 +48,7 @@ msgstr "メッセージを追加"
 msgid "Notification Time"
 msgstr "通知時間帯"
 
-#: templates/bot/add_message.html:36
+#: templates/bot/add_message.html:31 templates/bot/show_message.html:17
 #, fuzzy
 msgid "Message"
 msgstr "メッセージ"
@@ -57,7 +57,7 @@ msgstr "メッセージ"
 msgid "Edit"
 msgstr "編集"
 
-#: templates/bot/edit.html:45 templates/user/home.html:234
+#: templates/bot/edit.html:45 templates/user/home.html:233
 msgid "Menu"
 msgstr "メニュー"
 
@@ -69,6 +69,10 @@ msgstr "スケジュールリスト"
 msgid "Bot List"
 msgstr "Bot リスト"
 
+#: templates/bot/show_message.html:27
+msgid "Delete"
+msgstr ""
+
 #: templates/store/buy.html:17
 msgid "Upgrade from purchase"
 msgstr "購入してアップグレード"
@@ -77,11 +81,11 @@ msgstr "購入してアップグレード"
 msgid "Please wait."
 msgstr "お待ちください。"
 
-#: templates/store/buy.html:23
+#: templates/store/buy.html:24
 msgid "Not for sale."
 msgstr "非売品"
 
-#: templates/store/buy.html:27 templates/store/index.html:24
+#: templates/store/buy.html:28 templates/store/index.html:24
 msgid "Purchase"
 msgstr "購入"
 
@@ -94,11 +98,11 @@ msgid "Amount of notification remaining was upgraded!"
 msgstr "通知残数のアップグレードをしました！"
 
 #: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
-#: templates/user/home.html:227
+#: templates/user/home.html:226
 msgid "Remaining"
 msgstr "残数"
 
-#: templates/store/index.html:17 templates/user/home.html:237
+#: templates/store/index.html:17 templates/user/home.html:236
 msgid "Notification Store"
 msgstr "通知ストア"
 
@@ -136,7 +140,7 @@ msgstr "期限が切れる日"
 msgid "Tweet Success"
 msgstr "Tweet 成功"
 
-#: templates/user/bot.html:17 templates/user/home.html:236
+#: templates/user/bot.html:17 templates/user/home.html:235
 msgid "Bot Settings"
 msgstr "Bot 設定"
 
@@ -156,19 +160,19 @@ msgstr "Bot ID は半角英数字でお願いします。"
 msgid "Bot ID is required."
 msgstr "Bot ID は必須項目です。"
 
-#: templates/user/home.html:163
+#: templates/user/home.html:162
 msgid "Are you sure you want to delete?"
 msgstr "本当に削除を行いますか？"
 
-#: templates/user/home.html:219
+#: templates/user/home.html:218
 msgid "Hi!"
 msgstr "こんちわ！"
 
-#: templates/user/home.html:235 templates/user/settings.html:17
+#: templates/user/home.html:234 templates/user/settings.html:17
 msgid "Notification Settings"
 msgstr "通知設定"
 
-#: templates/user/home.html:241
+#: templates/user/home.html:240
 msgid "Logout"
 msgstr "ログアウト"
 

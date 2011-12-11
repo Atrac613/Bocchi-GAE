@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-11 14:06+0900\n"
+"POT-Creation-Date: 2011-12-11 19:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Nickname"
 msgstr ""
 
-#: templates/bot/add.html:30 templates/bot/add_message.html:40
+#: templates/bot/add.html:30 templates/bot/add_message.html:35
 #: templates/bot/edit.html:39 templates/user/bot.html:34
 #: templates/user/settings.html:66
 msgid "Submit"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Notification Time"
 msgstr ""
 
-#: templates/bot/add_message.html:36
+#: templates/bot/add_message.html:31 templates/bot/show_message.html:17
 msgid "Message"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/bot/edit.html:45 templates/user/home.html:234
+#: templates/bot/edit.html:45 templates/user/home.html:233
 msgid "Menu"
 msgstr ""
 
@@ -67,6 +67,10 @@ msgstr ""
 msgid "Bot List"
 msgstr ""
 
+#: templates/bot/show_message.html:27
+msgid "Delete"
+msgstr ""
+
 #: templates/store/buy.html:17
 msgid "Upgrade from purchase"
 msgstr ""
@@ -75,11 +79,11 @@ msgstr ""
 msgid "Please wait."
 msgstr ""
 
-#: templates/store/buy.html:23
+#: templates/store/buy.html:24
 msgid "Not for sale."
 msgstr ""
 
-#: templates/store/buy.html:27 templates/store/index.html:24
+#: templates/store/buy.html:28 templates/store/index.html:24
 msgid "Purchase"
 msgstr ""
 
@@ -92,11 +96,11 @@ msgid "Amount of notification remaining was upgraded!"
 msgstr ""
 
 #: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
-#: templates/user/home.html:227
+#: templates/user/home.html:226
 msgid "Remaining"
 msgstr ""
 
-#: templates/store/index.html:17 templates/user/home.html:237
+#: templates/store/index.html:17 templates/user/home.html:236
 msgid "Notification Store"
 msgstr ""
 
@@ -134,7 +138,7 @@ msgstr ""
 msgid "Tweet Success"
 msgstr ""
 
-#: templates/user/bot.html:17 templates/user/home.html:236
+#: templates/user/bot.html:17 templates/user/home.html:235
 msgid "Bot Settings"
 msgstr ""
 
@@ -154,19 +158,19 @@ msgstr ""
 msgid "Bot ID is required."
 msgstr ""
 
-#: templates/user/home.html:163
+#: templates/user/home.html:162
 msgid "Are you sure you want to delete?"
 msgstr ""
 
-#: templates/user/home.html:219
+#: templates/user/home.html:218
 msgid "Hi!"
 msgstr ""
 
-#: templates/user/home.html:235 templates/user/settings.html:17
+#: templates/user/home.html:234 templates/user/settings.html:17
 msgid "Notification Settings"
 msgstr ""
 
-#: templates/user/home.html:241
+#: templates/user/home.html:240
 msgid "Logout"
 msgstr ""
 
