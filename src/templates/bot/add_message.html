@@ -15,6 +15,11 @@
 	<div data-role="content">
 		<div class="content-primary">
 			<h2>{% trans "Add Message" %}</h2>
+			{% if advance_flg %}
+			<p><a href="?bot_id={{ bot_id }}&advance=false">Simple</a></p>
+			{% else %}
+			<p><a href="?bot_id={{ bot_id }}&advance=true">Advance</a></p>
+			{% endif %}
 			<form action="/bot/add_message" method="post" data-ajax="false">
 				<input type="hidden" name="mode" value="add_message" />
 				<input type="hidden" name="bot_id" id="bot_id" value="{{ bot_id }}" />

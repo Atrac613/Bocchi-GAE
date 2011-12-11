@@ -283,11 +283,26 @@ class UpdateBotAddMessageAPI(webapp.RequestHandler):
             
             logging.info('time: %s' % time)
             
-            bot_message = BotMessage()
-            bot_message.bot_prefs_key = bot_prefs.key()
-            bot_message.time = time
-            bot_message.message = message
-            bot_message.put()
+            if time.find('simple_') > -1:
+                logging.info('Simple mode')
+                hour = int(time[7:])
+                for i in range(3):
+                    time = '%02d00-%02d00' % (hour, hour + 1)
+                    logging.info('time: %s' % time)
+                    bot_message = BotMessage()
+                    bot_message.bot_prefs_key = bot_prefs.key()
+                    bot_message.time = time
+                    bot_message.message = message
+                    bot_message.put()
+                    
+                    hour = hour + 1
+                
+            else:
+                bot_message = BotMessage()
+                bot_message.bot_prefs_key = bot_prefs.key()
+                bot_message.time = time
+                bot_message.message = message
+                bot_message.put()
             
         json = simplejson.dumps({'status': True}, ensure_ascii=False)
         self.response.content_type = 'application/json'

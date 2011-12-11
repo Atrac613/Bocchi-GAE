@@ -67,19 +67,45 @@ class ScheduleListPage(I18NRequestHandler):
         if bot_prefs is None:
             return self.error(404)
         
+        advance_flg = self.request.get('advance')
+        if advance_flg == 'true':
+            advance_flg = True
+        else:
+            advance_flg = False
+        
         schedule_list = []
-        for i in range(24):
-            time_key = '%02d00-%02d00' % (i, i+1)
-            time = '%02d:00 - %02d:00' % (i, i+1)
-            bot_message_list = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', time_key).order('created_at').fetch(20)
-            
-            schedule_list.append({'time':time, 'list': bot_message_list})
+        
+        if advance_flg:
+            for i in range(24):
+                time_key = '%02d00-%02d00' % (i, i+1)
+                time = '%02d:00 - %02d:00' % (i, i+1)
+                bot_message_list = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', time_key).order('created_at').fetch(20)
+                
+                schedule_list.append({'time':time, 'list': bot_message_list})
+        else:
+            for i in [0, 3, 6, 9, 12, 15, 18, 21]:
+                time = '%02d:00 - %02d:00' % (i, i+3)
+                
+                hour = i
+                bot_message_list = []
+                for n in range(3):
+                    time_key = '%02d00-%02d00' % (hour, hour+1)
+                    bot_message = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', time_key).order('created_at').fetch(20)
+                    
+                    for row in bot_message:
+                        bot_message_list.append(row)
+                    
+                    hour = hour + 1
+                    
+                schedule_list.append({'time':time, 'list': bot_message_list})
+
         
         template_values = {
             'bot_id': bot_id,
             'nickname': bot_prefs.nickname,
             'public_flg': bot_prefs.public_flg,
-            'schedule_list': schedule_list
+            'schedule_list': schedule_list,
+            'advance_flg': advance_flg
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/schedule_list.html')
@@ -94,16 +120,31 @@ class AddMessagePage(I18NRequestHandler):
         if bot_prefs is None:
             return self.error(404)
         
+        advance_flg = self.request.get('advance')
+        if advance_flg == 'true':
+            advance_flg = True
+        else:
+            advance_flg = False
+        
         hour_list = []
-        for i in range(24):
-            key = '%02d00-%02d00' % (i, i+1)
-            value = '%02d:00 - %02d:00' % (i, i+1)
-            logging.info('%s'%value)
-            hour_list.append({'key':key, 'value':value})
+        if advance_flg:
+            for i in range(24):
+                key = '%02d00-%02d00' % (i, i+1)
+                value = '%02d:00 - %02d:00' % (i, i+1)
+                logging.info('%s'%value)
+                hour_list.append({'key':key, 'value':value})
+            
+        else:
+            for i in [0, 3, 6, 9, 12, 15, 18, 21]:
+                key = 'simple_%d' % i
+                value = '%02d:00 - %02d:00' % (i, i+3)
+                logging.info('%s'%value)
+                hour_list.append({'key':key, 'value':value})
         
         template_values = {
             'hour_list': hour_list,
             'bot_id': bot_id,
+            'advance_flg': advance_flg
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/add_message.html')

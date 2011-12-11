@@ -15,6 +15,11 @@
 	<div data-role="content">
 		<div class="content-primary">
 			<ul data-role="listview">
+				{% if advance_flg %}
+				<li><a href="?bot_id={{ bot_id }}&advance=false">Simple</a></li>
+				{% else %}
+				<li><a href="?bot_id={{ bot_id }}&advance=true">Advance</a></li>
+				{% endif %}
 				{% for row in schedule_list %}
 				<li data-role="list-divider">{{ row.time }}</li>
 					{% for bot_message in row.list %}
