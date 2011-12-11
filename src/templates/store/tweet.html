@@ -14,15 +14,15 @@
 <div id="store_tweet" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Add by Tweet</h2>
+			<h2>{% trans "Upgrade from tweet" %}</h2>
 			
-			<p>Add notification count by tweet at once a week.</p>
+			<p>{% trans "You can upgrade from a tweet once a week." %}</p>
 			
 			{% if can_tweet %}
 				<button type="button" id="tweet">Tweet</button>
-			{% else %}
-				<p>You can not tweet.</p>
-				<p>Expired at:<br />{{ expired_at }}</p>
+			{% else %} 
+				<p>{% trans "You can not tweet." %}</p>
+				<p>{% trans "Expired at" %}:<br />{{ expired_at }}</p>
 			{% endif %}
 			
 		</div>

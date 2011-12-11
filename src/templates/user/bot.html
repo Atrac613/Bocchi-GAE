@@ -14,7 +14,7 @@
 <div id="bot" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Bot Settings</h2>
+			<h2>{% trans "Bot Settings" %}</h2>
 			<form action="/user/bot" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
@@ -31,15 +31,15 @@
 	        			<input type="text" name="custom_bot_id" id="input-1" value="" />
 					</li>
 					<li data-role="fieldcontain">
-	        			<button type="button" data-theme="a">Submit</button
+	        			<button type="button" data-theme="a">{% trans "Submit" %}</button
 					</li>
 				</ul>
 			</form>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Bot Menu</li>
-				<li><a href="/bot/add">Create</a></li>
-				<li><a href="/bot/list">List</a></li>
+				<li data-role="list-divider">{% trans "Bot Menu" %}</li>
+				<li><a href="/bot/add">{% trans "Create" %}</a></li>
+				<li><a href="/bot/list">{% trans "List" %}</a></li>
 			</ul>
 			
 		</div>

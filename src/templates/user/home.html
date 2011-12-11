@@ -96,10 +96,10 @@ $(function() {
 		 
 		        return false;
 			}else{
-				alert("Bot ID is only alphanumeric character.");
+				alert('{% trans "Bot ID is only alphanumeric character." %}');
 			}
 		}else{
-			alert('Bot ID is required.');
+			alert('{% trans "Bot ID is required." %}');
 		}
  
         return false;
@@ -160,7 +160,7 @@ $(function() {
 	
 	$('#bot_schedule a').live('click', function(){
 	//$('#bot_schedule a').bind('tap',function(){
-		if (window.confirm('Are you sure you want to delete?')) {
+		if (window.confirm('{% trans "Are you sure you want to delete?" %}')) {
 			//$('form').submit();
 			var postData = {};
 	        $(this).find('input:hidden').each(function(){
@@ -216,29 +216,29 @@ function updateNotificationCount(){
 <div id="home" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Hi! {{ user_prefs.google_account.nickname }}.</h2>
+			<h2>{% trans "Hi!" %} {{ user_prefs.google_account.nickname }}.</h2>
 			<form action="/user/home" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
-	        			<label for="name">Bot :</label>
+	        			<label for="name">Bot:</label>
 	        			{{ bot_nickname }} (ID: {{ bot_id }})
 					</li>
 					<li data-role="fieldcontain">
-	        			<label for="name">Quantity :</label>
+	        			<label for="name">{% trans "Remaining" %}:</label>
 	        			{{ quantity }}
 					</li>
 				</ul>
 			</form>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Menu</li>
-				<li><a href="/user/settings">Notification Settings</a></li>
-				<li><a href="/user/bot">Bot Settings</a></li>
-				<li><a href="/store/">Notification Store</a></li>
+				<li data-role="list-divider">{% trans "Menu" %}</li>
+				<li><a href="/user/settings">{% trans "Notification Settings" %}</a></li>
+				<li><a href="/user/bot">{% trans "Bot Settings" %}</a></li>
+				<li><a href="/store/">{% trans "Notification Store" %}</a></li>
 			</ul>
 			
 			<div style="margin-top: 40px;">
-				<button type="button">Logout</button>
+				<button type="button">{% trans "Logout" %}</button>
 			</div>
 		</div>
 	</div>

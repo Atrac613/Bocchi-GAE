@@ -14,7 +14,7 @@
 <div id="bot_edit" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Edit</h2>
+			<h2>{% trans "Edit" %}</h2>
 			<form action="/bot/edit" method="post" data-ajax="false">
 				<input type="hidden" name="mode" value="modify" />
 				<input type="hidden" name="bot_id" value="{{ bot_id }}" />
@@ -23,7 +23,7 @@
 	        			Bot ID: {{ bot_id }}
 					</li>
 					<li data-role="fieldcontain">
-	        			<label for="input-1" class="input">Nickname:</label>
+	        			<label for="input-1" class="input">{% trans "Nickname" %}:</label>
 	        			<input type="text" name="nickname" id="input-1" value="{{ nickname }}" />
 					</li>
 					<!--
@@ -36,15 +36,15 @@
 					</li>
 					-->
 					<li data-role="fieldcontain">
-	        			<button type="button" data-theme="a">Submit</button
+	        			<button type="button" data-theme="a">{% trans "Submit" %}</button
 					</li>
 				</ul>
 			</form>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Menu</li>
-				<li><a href="/bot/schedule_list?bot_id={{ bot_id }}">Schedule List</a></li>
-				<li><a href="/bot/add_message?bot_id={{ bot_id }}">Add Message</a></li>
+				<li data-role="list-divider">{% trans "Menu" %}</li>
+				<li><a href="/bot/schedule_list?bot_id={{ bot_id }}">{% trans "Schedule List" %}</a></li>
+				<li><a href="/bot/add_message?bot_id={{ bot_id }}">{% trans "Add Message" %}</a></li>
 			</ul>
 
 		</div>

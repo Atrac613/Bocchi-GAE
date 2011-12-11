@@ -14,12 +14,14 @@
 <div id="store" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Notification Store</h2>
+			<h2>{% trans "Notification Store" %}</h2>
+			
+			<p>{% trans "The notification store will be able to upgrade the amount of notifications remaining." %}</p>
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Add notify count by</li>
-				<li><a href="/store/tweet">Tweet</a></li>
-				<li><a href="/store/buy">Buy</a></li>
+				<li data-role="list-divider">{% trans "Store Menu" %}</li>
+				<li><a href="/store/tweet">{% trans "Tweet" %}</a></li>
+				<li><a href="/store/buy">{% trans "Purchase" %}</a></li>
 			</ul>
 
 		</div>

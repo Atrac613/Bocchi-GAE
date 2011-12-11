@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 00:13+0900\n"
+"POT-Creation-Date: 2011-12-11 14:06+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,22 +25,180 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: templates/user/home.html:46
-msgid "Daily Max Notify Count"
-msgstr "一日の最大通知数（おおよそ）"
+#: templates/bot/add.html:17 templates/user/bot.html:41
+msgid "Create"
+msgstr "作成"
 
-#: templates/user/home.html:57
-msgid "Schedule"
+#: templates/bot/add.html:26 templates/bot/edit.html:26
+msgid "Nickname"
+msgstr "ニックネーム"
+
+#: templates/bot/add.html:30 templates/bot/add_message.html:40
+#: templates/bot/edit.html:39 templates/user/bot.html:34
+#: templates/user/settings.html:66
+msgid "Submit"
+msgstr "送信"
+
+#: templates/bot/add_message.html:17 templates/bot/edit.html:47
+msgid "Add Message"
+msgstr "メッセージを追加"
+
+#: templates/bot/add_message.html:23
+#, fuzzy
+msgid "Notification Time"
 msgstr "通知時間帯"
 
-#: templates/user/home.html:69
+#: templates/bot/add_message.html:36
+#, fuzzy
+msgid "Message"
+msgstr "メッセージ"
+
+#: templates/bot/edit.html:17
+msgid "Edit"
+msgstr "編集"
+
+#: templates/bot/edit.html:45 templates/user/home.html:234
+msgid "Menu"
+msgstr "メニュー"
+
+#: templates/bot/edit.html:46
+msgid "Schedule List"
+msgstr "スケジュールリスト"
+
+#: templates/bot/list.html:17
+msgid "Bot List"
+msgstr "Bot リスト"
+
+#: templates/store/buy.html:17
+msgid "Upgrade from purchase"
+msgstr "購入してアップグレード"
+
+#: templates/store/buy.html:21
+msgid "Please wait."
+msgstr "お待ちください。"
+
+#: templates/store/buy.html:23
+msgid "Not for sale."
+msgstr "非売品"
+
+#: templates/store/buy.html:27 templates/store/index.html:24
+msgid "Purchase"
+msgstr "購入"
+
+#: templates/store/buy_success.html:17
+msgid "Purchase Success"
+msgstr "購入成功"
+
+#: templates/store/buy_success.html:19 templates/store/tweet_success.html:19
+msgid "Amount of notification remaining was upgraded!"
+msgstr "通知残数のアップグレードをしました！"
+
+#: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
+#: templates/user/home.html:227
+msgid "Remaining"
+msgstr "残数"
+
+#: templates/store/index.html:17 templates/user/home.html:237
+msgid "Notification Store"
+msgstr "通知ストア"
+
+#: templates/store/index.html:19
+msgid ""
+"The notification store will be able to upgrade the amount of notifications "
+"remaining."
+msgstr "通知ストアは通知残数のアップグレードをする事ができます。"
+
+#: templates/store/index.html:22
+msgid "Store Menu"
+msgstr "ストアメニュー"
+
+#: templates/store/index.html:23
+msgid "Tweet"
+msgstr ""
+
+#: templates/store/tweet.html:17
+msgid "Upgrade from tweet"
+msgstr "Tweet からアップグレード"
+
+#: templates/store/tweet.html:19
+msgid "You can upgrade from a tweet once a week."
+msgstr "あなたは一週間に一度 Tweet をしてアップグレードする事ができます。"
+
+#: templates/store/tweet.html:24
+msgid "You can not tweet."
+msgstr "あなたは Tweet できません。"
+
+#: templates/store/tweet.html:25
+msgid "Expired at"
+msgstr "期限が切れる日"
+
+#: templates/store/tweet_success.html:17
+msgid "Tweet Success"
+msgstr "Tweet 成功"
+
+#: templates/user/bot.html:17 templates/user/home.html:236
+msgid "Bot Settings"
+msgstr "Bot 設定"
+
+#: templates/user/bot.html:40
+msgid "Bot Menu"
+msgstr "Bot メニュー"
+
+#: templates/user/bot.html:42
+msgid "List"
+msgstr "リスト"
+
+#: templates/user/home.html:99
+msgid "Bot ID is only alphanumeric character."
+msgstr "Bot ID は半角英数字でお願いします。"
+
+#: templates/user/home.html:102
+msgid "Bot ID is required."
+msgstr "Bot ID は必須項目です。"
+
+#: templates/user/home.html:163
+msgid "Are you sure you want to delete?"
+msgstr "本当に削除を行いますか？"
+
+#: templates/user/home.html:219
+msgid "Hi!"
+msgstr "こんちわ！"
+
+#: templates/user/home.html:235 templates/user/settings.html:17
+msgid "Notification Settings"
+msgstr "通知設定"
+
+#: templates/user/home.html:241
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/user/settings.html:21
+msgid "Notify of roughly per day"
+msgstr "大体一日あたりの通知"
+
+#: templates/user/settings.html:30
+msgid "Notification time"
+msgstr "通知時間帯"
+
+#: templates/user/settings.html:58
 msgid "Timezone"
 msgstr "タイムゾーン"
 
-#: templates/user/welcome.html:28
-msgid "Fake Notify is save your Push Notification."
-msgstr "Fake Notify はあなたのプッシュ通知を守ります。"
+#: templates/user/welcome.html:24
+msgid "What is Bocchi?"
+msgstr "ぼっちってなに？"
+
+#: templates/user/welcome.html:26
+msgid "Bocchi is protective of your silent mobile phones."
+msgstr "ぼっちはあなたの静かな携帯電話を守ります。"
+
+#: templates/user/welcome.html:27
+msgid "You can create a own notification bot systems."
+msgstr "あなた独自の通知 Bot システムを作る事ができます。"
 
 #: templates/user/welcome.html:29
-msgid "You can create a own notification bot systems."
-msgstr "あなた自身のプッシュ通BOTを作る事ができます。"
+msgid "Start"
+msgstr "始める"
+
+#~ msgid "Approximate number of notifications per day."
+#~ msgstr "一日のおおよその通知数"

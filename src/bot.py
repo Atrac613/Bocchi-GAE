@@ -10,7 +10,14 @@ from google.appengine.api import users
 from db import BotMessage
 from db import BotPrefs
 
-class HomePage(webapp.RequestHandler):
+os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
+from django.conf import settings
+# Force Django to reload settings
+settings._target = None
+
+from i18NRequestHandler import I18NRequestHandler
+
+class HomePage(I18NRequestHandler):
     def get(self):
 
         template_values = {
@@ -19,7 +26,7 @@ class HomePage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/index.html')
         self.response.out.write(template.render(path, template_values))
 
-class ListPage(webapp.RequestHandler):
+class ListPage(I18NRequestHandler):
     def get(self):
         user = users.get_current_user()
         
@@ -32,7 +39,7 @@ class ListPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/list.html')
         self.response.out.write(template.render(path, template_values))
 
-class EditPage(webapp.RequestHandler):
+class EditPage(I18NRequestHandler):
     def get(self):
 
         bot_id = self.request.get('bot_id')
@@ -50,7 +57,7 @@ class EditPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/edit.html')
         self.response.out.write(template.render(path, template_values))
 
-class ScheduleListPage(webapp.RequestHandler):
+class ScheduleListPage(I18NRequestHandler):
     def get(self):
 
         bot_id = self.request.get('bot_id')
@@ -85,7 +92,7 @@ class ScheduleListPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/schedule_list.html')
         self.response.out.write(template.render(path, template_values))
 
-class AddMessagePage(webapp.RequestHandler):
+class AddMessagePage(I18NRequestHandler):
     def get(self):
 
         bot_id = self.request.get('bot_id')
@@ -101,7 +108,7 @@ class AddMessagePage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/add_message.html')
         self.response.out.write(template.render(path, template_values))
     
-class AddPage(webapp.RequestHandler):
+class AddPage(I18NRequestHandler):
     def get(self):
 
         template_values = {

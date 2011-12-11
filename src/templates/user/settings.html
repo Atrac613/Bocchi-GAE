@@ -14,11 +14,11 @@
 <div id="settings" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Notification Settings</h2>
+			<h2>{% trans "Notification Settings" %}</h2>
 			<form action="/user/home" method="post" data-ajax="false">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
-	        			<label for="select-choice-1" class="select">{% trans "Daily Max Notify Count" %}:</label>
+	        			<label for="select-choice-1" class="select">{% trans "Notify of roughly per day" %}:</label>
 	        			<select name="daily_max_notify_count" id="select-choice-1">
 	        				{% for i in max_notify_list %}
 								<option value="{{ i }}" {% ifequal i user_prefs.daily_max_notify_count %} selected="selected"{% endifequal %}>{{ i }}</option>
@@ -27,7 +27,7 @@
 					</li>
 					<li data-role="fieldcontain">
 	        			<fieldset data-role="controlgroup">
-	        				<legend>{% trans "Schedule" %}:</legend>
+	        				<legend>{% trans "Notification time" %}:</legend>
 	        				<input type="checkbox" name="0000_0300" id="checkbox-1a" class="custom" value="1" {% if user_prefs.schedule_0000_0300 %}checked="checked"{% endif %} />
 							<label for="checkbox-1a">00:00 - 03:00</label>
 	        			
@@ -63,7 +63,7 @@
 						</select>
 					</li>
 					<li data-role="fieldcontain">
-	        			<button type="button" data-theme="a">Submit</button
+	        			<button type="button" data-theme="a">{% trans "Submit" %}</button
 					</li>
 				</ul>
 			</form>
@@ -72,4 +72,4 @@
 	</div>
 </div>
 
-{% endblock %}
+{% endblock %}}

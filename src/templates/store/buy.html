@@ -14,16 +14,17 @@
 <div id="store_buy" data-role="page" class="type-interior">
 	<div data-role="content">
 		<div class="content-primary">
-			<h2>Add by In-app purchase</h2>
+			<h2>{% trans "Upgrade from purchase" %}</h2>
 			
 			<center>
 				<img src="/images/push150.png" />
-				<p id="item_title">お待ちください...</p>
-				<p id="item_disable" style="display:none;">非売品</p>
+				<p id="item_wait">{% trans "Please wait." %}</p>
+				<p id="item_title" style="display:none;"></p>
+				<p id="item_disable" style="display:none;">{% trans "Not for sale." %}</p>
 				<p id="item_description"></p>
 			</center>
 
-			<button type="button" id="buy_item" disabled>Buy</button>
+			<button type="button" id="buy_item" disabled>{% trans "Purchase" %}</button>
 			
 		</div>
 	</div>

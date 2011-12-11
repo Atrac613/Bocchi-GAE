@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 00:13+0900\n"
+"POT-Creation-Date: 2011-12-11 14:06+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,22 +25,175 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: templates/user/home.html:46
-msgid "Daily Max Notify Count"
+#: templates/bot/add.html:17 templates/user/bot.html:41
+msgid "Create"
 msgstr ""
 
-#: templates/user/home.html:57
-msgid "Schedule"
+#: templates/bot/add.html:26 templates/bot/edit.html:26
+msgid "Nickname"
 msgstr ""
 
-#: templates/user/home.html:69
+#: templates/bot/add.html:30 templates/bot/add_message.html:40
+#: templates/bot/edit.html:39 templates/user/bot.html:34
+#: templates/user/settings.html:66
+msgid "Submit"
+msgstr ""
+
+#: templates/bot/add_message.html:17 templates/bot/edit.html:47
+msgid "Add Message"
+msgstr ""
+
+#: templates/bot/add_message.html:23
+msgid "Notification Time"
+msgstr ""
+
+#: templates/bot/add_message.html:36
+msgid "Message"
+msgstr ""
+
+#: templates/bot/edit.html:17
+msgid "Edit"
+msgstr ""
+
+#: templates/bot/edit.html:45 templates/user/home.html:234
+msgid "Menu"
+msgstr ""
+
+#: templates/bot/edit.html:46
+msgid "Schedule List"
+msgstr ""
+
+#: templates/bot/list.html:17
+msgid "Bot List"
+msgstr ""
+
+#: templates/store/buy.html:17
+msgid "Upgrade from purchase"
+msgstr ""
+
+#: templates/store/buy.html:21
+msgid "Please wait."
+msgstr ""
+
+#: templates/store/buy.html:23
+msgid "Not for sale."
+msgstr ""
+
+#: templates/store/buy.html:27 templates/store/index.html:24
+msgid "Purchase"
+msgstr ""
+
+#: templates/store/buy_success.html:17
+msgid "Purchase Success"
+msgstr ""
+
+#: templates/store/buy_success.html:19 templates/store/tweet_success.html:19
+msgid "Amount of notification remaining was upgraded!"
+msgstr ""
+
+#: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
+#: templates/user/home.html:227
+msgid "Remaining"
+msgstr ""
+
+#: templates/store/index.html:17 templates/user/home.html:237
+msgid "Notification Store"
+msgstr ""
+
+#: templates/store/index.html:19
+msgid ""
+"The notification store will be able to upgrade the amount of notifications "
+"remaining."
+msgstr ""
+
+#: templates/store/index.html:22
+msgid "Store Menu"
+msgstr ""
+
+#: templates/store/index.html:23
+msgid "Tweet"
+msgstr ""
+
+#: templates/store/tweet.html:17
+msgid "Upgrade from tweet"
+msgstr ""
+
+#: templates/store/tweet.html:19
+msgid "You can upgrade from a tweet once a week."
+msgstr ""
+
+#: templates/store/tweet.html:24
+msgid "You can not tweet."
+msgstr ""
+
+#: templates/store/tweet.html:25
+msgid "Expired at"
+msgstr ""
+
+#: templates/store/tweet_success.html:17
+msgid "Tweet Success"
+msgstr ""
+
+#: templates/user/bot.html:17 templates/user/home.html:236
+msgid "Bot Settings"
+msgstr ""
+
+#: templates/user/bot.html:40
+msgid "Bot Menu"
+msgstr ""
+
+#: templates/user/bot.html:42
+msgid "List"
+msgstr ""
+
+#: templates/user/home.html:99
+msgid "Bot ID is only alphanumeric character."
+msgstr ""
+
+#: templates/user/home.html:102
+msgid "Bot ID is required."
+msgstr ""
+
+#: templates/user/home.html:163
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: templates/user/home.html:219
+msgid "Hi!"
+msgstr ""
+
+#: templates/user/home.html:235 templates/user/settings.html:17
+msgid "Notification Settings"
+msgstr ""
+
+#: templates/user/home.html:241
+msgid "Logout"
+msgstr ""
+
+#: templates/user/settings.html:21
+msgid "Notify of roughly per day"
+msgstr ""
+
+#: templates/user/settings.html:30
+msgid "Notification time"
+msgstr ""
+
+#: templates/user/settings.html:58
 msgid "Timezone"
 msgstr ""
 
-#: templates/user/welcome.html:28
-msgid "Fake Notify is save your Push Notification."
+#: templates/user/welcome.html:24
+msgid "What is Bocchi?"
+msgstr ""
+
+#: templates/user/welcome.html:26
+msgid "Bocchi is protective of your silent mobile phones."
+msgstr ""
+
+#: templates/user/welcome.html:27
+msgid "You can create a own notification bot systems."
 msgstr ""
 
 #: templates/user/welcome.html:29
-msgid "You can create a own bot systems."
+msgid "Start"
 msgstr ""
