@@ -22,14 +22,9 @@
 					<li data-role="fieldcontain">
 	        			<label for="select-choice-1" class="select">{% trans "Notification Time" %}:</label>
 	        			<select name="time" id="select-choice-1">
-							<option value="0000-0300">00:00 - 03:00</option>
-							<option value="0300-0600">03:00 - 06:00</option>
-							<option value="0600-0900">06:00 - 09:00</option>
-							<option value="0900-1200">09:00 - 12:00</option>
-							<option value="1200-1500">12:00 - 15:00</option>
-							<option value="1500-1800">15:00 - 18:00</option>
-							<option value="1800-2100">18:00 - 21:00</option>
-							<option value="2100-2400">21:00 - 24:00</option>
+	        				{% for row in hour_list %}
+	        				<option value="{{ row.key }}">{{ row.value }}</option>
+	        				{% endfor %}
 	        			</select>
 					</li>
 					<li data-role="fieldcontain">

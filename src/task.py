@@ -81,22 +81,8 @@ class SendNotifyTask(webapp.RequestHandler):
         logging.info('Date: %s' % date)
         hour = date.hour
         logging.info('Hour: %d' % hour)
-        if hour >= 21:
-            time = '2100-2400'
-        elif hour >= 18:
-            time = '1800-2100'
-        elif hour >= 15:
-            time = '1500-1800'
-        elif hour >= 12:
-            time = '1200-1500'
-        elif hour >= 9:
-            time = '0900-1200'
-        elif hour >= 6:
-            time = '0600-0900'
-        elif hour >= 3:
-            time = '0300-0600'
-        else:
-            time = '0000-0300'
+        
+        time = '%02d00-%02d00' % (hour, hour+1)
         
         logging.info('time: %s' % time)
         

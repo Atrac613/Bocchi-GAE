@@ -15,116 +15,15 @@
 	<div data-role="content">
 		<div class="content-primary">
 			<ul data-role="listview">
-				<li data-role="list-divider">00:00 - 03:00</li>
-				{% for row in bot_message_list_01 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">03:00 - 06:00</li>
-				{% for row in bot_message_list_02 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">06:00 - 09:00</li>
-				{% for row in bot_message_list_03 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">09:00 - 12:00</li>
-				{% for row in bot_message_list_04 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">12:00 - 15:00</li>
-				{% for row in bot_message_list_05 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">15:00 - 18:00</li>
-				{% for row in bot_message_list_06 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">18:00 - 21:00</li>
-				{% for row in bot_message_list_07 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
-				{% endfor %}
-				
-				<li data-role="list-divider">21:00 - 24:00</li>
-				{% for row in bot_message_list_08 %}
-				<li>
-					<a href="#">
-						<span>{{ row.message }}</span>
-						<form action="/bot/schedule_list" method="post">
-						<input type="hidden" name="mode" value="delete_message" />
-						<input type="hidden" name="bot_id" value="{{ bot_id }}" />
-						<input type="hidden" name="message_id" value="{{ row.key.id }}" />
-						</form>
-					</a>
-				</li>
+				{% for row in schedule_list %}
+				<li data-role="list-divider">{{ row.time }}</li>
+					{% for bot_message in row.list %}
+					<li>
+						<a href="/bot/show_message?id={{ bot_message.key.id }}&bot_id={{ bot_id }}">
+							<span>{{ bot_message.message }}</span>
+						</a>
+					</li>
+					{% endfor %}
 				{% endfor %}
 			</ul>
 		</div>

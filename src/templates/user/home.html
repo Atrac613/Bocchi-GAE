@@ -158,18 +158,17 @@ $(function() {
         return false;
 	});
 	
-	$('#bot_schedule a').live('click', function(){
-	//$('#bot_schedule a').bind('tap',function(){
+	$('#bot_show_message button').live('click', function(){
 		if (window.confirm('{% trans "Are you sure you want to delete?" %}')) {
 			//$('form').submit();
 			var postData = {};
-	        $(this).find('input:hidden').each(function(){
+	        $('#bot_show_message form').find('input:hidden').each(function(){
 	            postData[$(this).attr('name')] = $(this).val();
 	        });
-	        var that = this;
+	        var bot_id = $('#bot_id').val();
 	        $.post('/api/update/bot/delete_message', postData, function(data){
 	        	if (data.status) {
-	        		$(that).hide('slow', function(){ $(this).remove(); });
+	        		$.mobile.changePage('/bot/edit?bot_id='+bot_id, {transition: 'slideup'});
 	        	}
 	        }, 'JSON');
  

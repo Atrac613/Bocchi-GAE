@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import logging
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -66,27 +67,19 @@ class ScheduleListPage(I18NRequestHandler):
         if bot_prefs is None:
             return self.error(404)
         
-        bot_message_list_01 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '0000-0300').order('created_at').fetch(20)
-        bot_message_list_02 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '0300-0600').order('created_at').fetch(20)
-        bot_message_list_03 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '0600-0900').order('created_at').fetch(20)
-        bot_message_list_04 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '0900-1200').order('created_at').fetch(20)
-        bot_message_list_05 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '1200-1500').order('created_at').fetch(20)
-        bot_message_list_06 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '1500-1800').order('created_at').fetch(20)
-        bot_message_list_07 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '1800-2100').order('created_at').fetch(20)
-        bot_message_list_08 = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', '2100-2400').order('created_at').fetch(20)
+        schedule_list = []
+        for i in range(24):
+            time_key = '%02d00-%02d00' % (i, i+1)
+            time = '%02d:00 - %02d:00' % (i, i+1)
+            bot_message_list = BotMessage.all().filter('bot_prefs_key =', bot_prefs.key()).filter('time =', time_key).order('created_at').fetch(20)
+            
+            schedule_list.append({'time':time, 'list': bot_message_list})
         
         template_values = {
             'bot_id': bot_id,
             'nickname': bot_prefs.nickname,
             'public_flg': bot_prefs.public_flg,
-            'bot_message_list_01': bot_message_list_01,
-            'bot_message_list_02': bot_message_list_02,
-            'bot_message_list_03': bot_message_list_03,
-            'bot_message_list_04': bot_message_list_04,
-            'bot_message_list_05': bot_message_list_05,
-            'bot_message_list_06': bot_message_list_06,
-            'bot_message_list_07': bot_message_list_07,
-            'bot_message_list_08': bot_message_list_08
+            'schedule_list': schedule_list
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/schedule_list.html')
@@ -101,11 +94,46 @@ class AddMessagePage(I18NRequestHandler):
         if bot_prefs is None:
             return self.error(404)
         
+        hour_list = []
+        for i in range(24):
+            key = '%02d00-%02d00' % (i, i+1)
+            value = '%02d:00 - %02d:00' % (i, i+1)
+            logging.info('%s'%value)
+            hour_list.append({'key':key, 'value':value})
+        
         template_values = {
+            'hour_list': hour_list,
             'bot_id': bot_id,
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/bot/add_message.html')
+        self.response.out.write(template.render(path, template_values))
+    
+class ShowMessagePage(I18NRequestHandler):
+    def get(self):
+        
+        user= users.get_current_user()
+        
+        id = self.request.get('id')
+        bot_id = self.request.get('bot_id')
+        
+        bot_prefs = BotPrefs.all().filter('google_account =', user).filter('bot_id =', bot_id).get()
+        if bot_prefs is None:
+            return self.error(404)
+        
+        bot_message = BotMessage.get_by_id(int(id))
+        if bot_message is None:
+            return self.error(404)
+        
+        if bot_message.bot_prefs_key.key() != bot_prefs.key():
+            return self.error(404)
+        
+        template_values = {
+            'bot_message': bot_message,
+            'bot_id': bot_id
+        }
+        
+        path = os.path.join(os.path.dirname(__file__), 'templates/bot/show_message.html')
         self.response.out.write(template.render(path, template_values))
     
 class AddPage(I18NRequestHandler):
@@ -123,7 +151,8 @@ application = webapp.WSGIApplication(
                                       ('/bot/list', ListPage),
                                       ('/bot/edit', EditPage),
                                       ('/bot/schedule_list', ScheduleListPage),
-                                      ('/bot/add_message', AddMessagePage)],
+                                      ('/bot/add_message', AddMessagePage),
+                                      ('/bot/show_message', ShowMessagePage)],
                                      debug=True)
 
 def main():
