@@ -22,7 +22,7 @@
 	        			<select name="bot_id" id="select-choice-1">
 							<option value="_custom">Custom</option>
 							{% for row in bot_list %}
-							<option value="{{ row.bot_id }}" {% ifequal row.bot_id user_prefs.bot_prefs_key.bot_id %}selected="selected"{% endifequal %}>{{ row.bot_id }}</option>
+							<option value="{{ row.bot_id }}" {% ifequal row.bot_id bot_id %}selected="selected"{% endifequal %}>{{ row.bot_id }}</option>
 							{% endfor %}
 	        			</select>
 					</li>

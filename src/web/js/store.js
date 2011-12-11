@@ -8,6 +8,7 @@ function setItemStatus(status) {
 	} else if (status == 2) {
 		$('#item_disable').show();
 		$('#item_title').hide();
+		$('#item_price').hide();
 		$('#item_wait').hide();
 	} else if (status == 3) {
 		$('#item_wait').show();
@@ -16,6 +17,7 @@ function setItemStatus(status) {
 	} else {
 		$('#item_disable').show();
 		$('#item_title').hide();
+		$('#item_price').hide();
 	}
 }
 

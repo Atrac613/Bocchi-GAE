@@ -204,9 +204,15 @@ class BotPage(webapp.RequestHandler):
                 bot_id_list.append(row.bot_id)
                 new_bot_list.append({'bot_id': row.bot_id, 'nickname': row.nickname})
                 
+        try:
+            bot_id = user_prefs.bot_prefs_key.bot_id
+        except:
+            bot_id = ''
+            
         template_values = {
             'bot_list': new_bot_list,
-            'user_prefs': user_prefs
+            'user_prefs': user_prefs,
+            'bot_id': bot_id
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/user/bot.html')
