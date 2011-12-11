@@ -12,7 +12,11 @@ $(function() {
 	$('form').live('submit', function(){
 		return false;
 	});
-	
+
+	{% if debug_flg %}
+		console.log('Debug Mode');
+	{% else %}
+		
 	$('#home').live('pageshow',function(event){
 		location.href = 'bocchi://bocchi.atrac613.io/hide/back_button';
 	});
@@ -26,6 +30,8 @@ $(function() {
 			page.remove();
 		};
 	});
+	
+	{% endif %}
 	
 	$('#home button').live('click', function(){
 		window.location = "{{ logout_url }}";

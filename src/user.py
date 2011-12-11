@@ -103,6 +103,12 @@ class HomePage(webapp.RequestHandler):
         if user_prefs is None:
             return self.redirect('/user/welcome')
         
+        debug_flg = self.request.get('debug')
+        if debug_flg == 'true':
+            debug_flg = True
+        else:
+            debug_flg = False
+        
         quantity = user_prefs.free_quantity + user_prefs.paid_quantity
         
         try:
@@ -119,7 +125,8 @@ class HomePage(webapp.RequestHandler):
             'user_prefs': user_prefs,
             'bot_id': bot_id,
             'bot_nickname': bot_nickname,
-            'logout_url': logout_url
+            'logout_url': logout_url,
+            'debug_flg': debug_flg
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/user/home.html')
