@@ -22,7 +22,7 @@ class NotifyCron(webapp.RequestHandler):
         else:
             page_id = 1
             
-        user_list_query = UserPrefs.all().filter('schedule_list =', datetime.datetime.now().hour)
+        user_list_query = UserPrefs.all().filter('activate_flg =', True).filter('schedule_list =', datetime.datetime.now().hour)
         
         last_cursor = memcache.get('notify_cursor_%d' % page_id)
         if last_cursor:
@@ -48,7 +48,7 @@ class NotifyCron(webapp.RequestHandler):
             
         cursor = user_list_query.cursor()
         
-        user_list_query = UserPrefs.all().filter('schedule_list =', datetime.datetime.now().hour)
+        user_list_query = UserPrefs.all().filter('activate_flg =', True).filter('schedule_list =', datetime.datetime.now().hour)
         user_list_query.with_cursor(cursor)
         user_list = user_list_query.fetch(1)
         logging.info('count: %d' % len(user_list))

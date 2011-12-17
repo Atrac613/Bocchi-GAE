@@ -27,6 +27,9 @@ from db import DevicePrefs
 from conf.settings import UA_APPLICATION_KEY
 from conf.settings import UA_APPLICATION_MASTER_SECRET
 
+from conf.settings import UA_PROD_APPLICATION_KEY
+from conf.settings import UA_PROD_APPLICATION_MASTER_SECRET
+
 class FindDeviceTask(webapp.RequestHandler):
     def post(self):
         user_id = self.request.get('user_id')
@@ -43,7 +46,10 @@ class FindDeviceTask(webapp.RequestHandler):
             return
         
         if user_prefs.free_quantity <= 0 and user_prefs.paid_quantity <= 0:
-            logging.error('quantity is invalid.')
+            user_prefs.activate_flg = False
+            user_prefs.put()
+            
+            logging.info('quantity is invalid.')
             return
         
         device_list = DevicePrefs.all().filter('google_account =', user_prefs.google_account).fetch(10)
@@ -74,7 +80,10 @@ class SendNotifyTask(webapp.RequestHandler):
             return
         
         if user_prefs.free_quantity <= 0 and user_prefs.paid_quantity <= 0:
-            logging.error('quantity is invalid.')
+            user_prefs.activate_flg = False
+            user_prefs.put()
+            
+            logging.info('quantity is invalid.')
             return
         
         date = datetime.datetime.now(tz=timezone(user_prefs.timezone))
@@ -112,7 +121,12 @@ class SendNotifyTask(webapp.RequestHandler):
             }
         }
         
-        base64string = b64encode('%s:%s' % (UA_APPLICATION_KEY, UA_APPLICATION_MASTER_SECRET))
+        if user_prefs.debug_flg:
+            base64string = b64encode('%s:%s' % (UA_APPLICATION_KEY, UA_APPLICATION_MASTER_SECRET))
+        
+        else:
+            base64string = b64encode('%s:%s' % (UA_PROD_APPLICATION_KEY, UA_PROD_APPLICATION_MASTER_SECRET))
+        
         headers = {'Authorization': 'Basic %s' % base64string}
         headers.update({'Content-Type': 'application/json'})
 
@@ -128,6 +142,9 @@ class SendNotifyTask(webapp.RequestHandler):
                 user_prefs.free_quantity = user_prefs.free_quantity - 1
             else:
                 user_prefs.paid_quantity = user_prefs.paid_quantity - 1
+                
+            if (user_prefs.free_quantity + user_prefs.paid_quantity) <= 0:
+                user_prefs.activate_flg = False
                 
             user_prefs.put()
             

@@ -8,6 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
+from google.appengine.api import taskqueue
 
 from django.utils import simplejson
 from pytz import timezone
@@ -361,6 +362,7 @@ class StoreTweetAPI(webapp.RequestHandler):
         store_tweet_history = StoreTweetHistory.all().filter('google_account =', user).filter('expired_at >', datetime.datetime.now()).get()
         if store_tweet_history is None:
             user_prefs.free_quantity = user_prefs.free_quantity + 100
+            user_prefs.activate_flg = True
             user_prefs.put()
             
             store_tweet_history = StoreTweetHistory()
@@ -376,6 +378,27 @@ class StoreTweetAPI(webapp.RequestHandler):
         self.response.content_type = 'application/json'
         self.response.out.write(json)
         
+class UpdateTestNotificationAPI(webapp.RequestHandler):
+    def post(self):
+
+        user = users.get_current_user()
+        
+        user_prefs = UserPrefs.all().filter('google_account =', user).get()
+        if user_prefs is None:
+            return self.error(404)
+        
+        try:
+            bot_id = user_prefs.bot_prefs_key.key().id()
+            taskqueue.add(url = '/task/find_device', params = {'user_id': user_prefs.key().id(), 'bot_id': bot_id})
+            data = {'status': True}
+        except:
+            logging.error('Add task failed.')
+            data = {'status': False}
+        
+        json = simplejson.dumps(data, ensure_ascii=False)
+        self.response.content_type = 'application/json'
+        self.response.out.write(json)
+        
 application = webapp.WSGIApplication(
                                      [('/api/update/user_prefs', UpdateUserPrefsAPI),
                                       ('/api/update/bot', UpdateBotAPI),
@@ -383,7 +406,8 @@ application = webapp.WSGIApplication(
                                       ('/api/update/bot/edit', UpdateBotEditAPI),
                                       ('/api/update/bot/add_message', UpdateBotAddMessageAPI),
                                       ('/api/update/bot/delete_message', UpdateBotDeleteMessageAPI),
-                                      ('/api/store/tweet', StoreTweetAPI)],
+                                      ('/api/store/tweet', StoreTweetAPI),
+                                      ('/api/update/test_notification', UpdateTestNotificationAPI)],
                                      debug=True)
 
 def main():

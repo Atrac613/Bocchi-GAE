@@ -29,10 +29,12 @@ class UserPrefs(db.Model):
     timezone = db.StringProperty()
     free_quantity = db.IntegerProperty()
     paid_quantity = db.IntegerProperty()
+    activate_flg = db.BooleanProperty()
     bot_prefs_key = db.ReferenceProperty(BotPrefs)
     schedule_list = db.ListProperty(int)
     notify_probability = db.FloatProperty()
     delete_flg = db.BooleanProperty()
+    debug_flg = db.BooleanProperty()
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now_add=True)
     

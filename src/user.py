@@ -73,6 +73,10 @@ class AuthUpdatePage(webapp.RequestHandler):
                 device_prefs.device_token = device_token
                 device_prefs.delete_flg = False
                 device_prefs.put()
+            else:
+                device_prefs.google_account = user
+                device_prefs.delete_flg = False
+                device_prefs.put()
                 
             user_prefs = UserPrefs.all().filter('google_account =', user).get()
             if user_prefs is None:
@@ -85,7 +89,9 @@ class AuthUpdatePage(webapp.RequestHandler):
                 user_prefs.free_quantity = 100
                 user_prefs.timezone = 'Asia/Tokyo'
                 user_prefs.notify_probability = 0.0
+                user_prefs.activate_flg = True
                 user_prefs.delete_flg = False
+                user_prefs.debug_flg = False
                 
                 if bot is not None:
                     user_prefs.bot_prefs_key = bot.key()

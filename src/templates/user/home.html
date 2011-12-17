@@ -37,7 +37,7 @@ $(function() {
 		window.location = "{{ logout_url }}";
 	});
 	
-	$('#settings button').live('click', function(){
+	$('#settings #settings_save_form button').live('click', function(){
 		$.mobile.showPageLoadingMsg();
 		
 		var postData = {};
@@ -54,6 +54,17 @@ $(function() {
         	if (data.status) {
         		window.location = "bocchi://bocchi.atrac613.io/alert/saved";
         	}
+        }, 'JSON');
+ 
+        return false;
+	});
+	
+	$('#settings #settings_test_form button').live('click', function(){
+		$.mobile.showPageLoadingMsg();
+		
+		$.post('/api/update/test_notification', {}, function(data){
+        	$.mobile.hidePageLoadingMsg();
+        	
         }, 'JSON');
  
         return false;
@@ -162,7 +173,7 @@ $(function() {
         	$.mobile.hidePageLoadingMsg();
         	
         	if (data.status) {
-        		$.mobile.changePage("/bot/schedule_list?bot_id=" + bot_id, 'slideup');
+        		$.mobile.changePage("/bot/schedule_list?bot_id=" + bot_id + "&advance=" + postData['advance'], 'slideup');
         		//window.location = "/bot/schedule_list?bot_id=" + bot_id;
         	}
         }, 'JSON');

@@ -15,7 +15,7 @@
 	<div data-role="content">
 		<div class="content-primary">
 			<h2>{% trans "Notification Settings" %}</h2>
-			<form action="/user/home" method="post" data-ajax="false">
+			<form action="/user/home" method="post" data-ajax="false" id="settings_save_form">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
 	        			<label for="select-choice-1" class="select">{% trans "Notify of roughly per day" %}:</label>
@@ -66,6 +66,15 @@
 	        			<button type="button" data-theme="a">{% trans "Submit" %}</button
 					</li>
 				</ul>
+			</form>
+			
+			<form action="/user/home" method="post" data-ajax="false" id="settings_test_form">
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">{% trans "Notification Test" %}</li>
+				<li data-role="fieldcontain">
+        			<button type="button" data-theme="a">{% trans "Submit" %}</button
+				</li>
+			</ul>
 			</form>
 
 		</div>
