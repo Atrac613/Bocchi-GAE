@@ -123,9 +123,12 @@ class SendNotifyTask(webapp.RequestHandler):
         
         if user_prefs.debug_flg:
             base64string = b64encode('%s:%s' % (UA_APPLICATION_KEY, UA_APPLICATION_MASTER_SECRET))
-        
+            logging.info('Debug Mode: %s' % device_token[0:4])
+            logging.info('Key: %s' % UA_APPLICATION_KEY[0:4]);
         else:
             base64string = b64encode('%s:%s' % (UA_PROD_APPLICATION_KEY, UA_PROD_APPLICATION_MASTER_SECRET))
+            logging.info('Production Mode: %s' % device_token[0:4])
+            logging.info('Key: %s' % UA_PROD_APPLICATION_KEY[0:4]);
         
         headers = {'Authorization': 'Basic %s' % base64string}
         headers.update({'Content-Type': 'application/json'})
