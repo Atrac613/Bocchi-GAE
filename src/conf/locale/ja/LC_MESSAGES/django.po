@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 00:15+0900\n"
+"POT-Creation-Date: 2011-12-18 00:31+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,6 @@ msgid "Thank you!"
 msgstr "ありがとうございました！"
 
 #: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
-#: templates/user/home.html:249
 msgid "Remaining"
 msgstr "残数"
 
@@ -172,6 +171,10 @@ msgstr "本当に削除を行いますか？"
 #: templates/user/home.html:241
 msgid "Hi!"
 msgstr "こんちわ！"
+
+#: templates/user/home.html:249
+msgid "Notification Remaining"
+msgstr "通知残数"
 
 #: templates/user/home.html:257 templates/user/settings.html:17
 msgid "Notification Settings"
