@@ -73,6 +73,10 @@ class AuthUpdatePage(webapp.RequestHandler):
                 device_prefs.device_token = device_token
                 device_prefs.delete_flg = False
                 device_prefs.put()
+            else:
+                device_prefs.google_account = user
+                device_prefs.delete_flg = False
+                device_prefs.put()
                 
             user_prefs = UserPrefs.all().filter('google_account =', user).get()
             if user_prefs is None:
@@ -85,7 +89,9 @@ class AuthUpdatePage(webapp.RequestHandler):
                 user_prefs.free_quantity = 100
                 user_prefs.timezone = 'Asia/Tokyo'
                 user_prefs.notify_probability = 0.0
+                user_prefs.activate_flg = True
                 user_prefs.delete_flg = False
+                user_prefs.debug_flg = False
                 
                 if bot is not None:
                     user_prefs.bot_prefs_key = bot.key()
@@ -103,6 +109,12 @@ class HomePage(webapp.RequestHandler):
         if user_prefs is None:
             return self.redirect('/user/welcome')
         
+        debug_flg = self.request.get('debug')
+        if debug_flg == 'true':
+            debug_flg = True
+        else:
+            debug_flg = False
+        
         quantity = user_prefs.free_quantity + user_prefs.paid_quantity
         
         try:
@@ -119,7 +131,8 @@ class HomePage(webapp.RequestHandler):
             'user_prefs': user_prefs,
             'bot_id': bot_id,
             'bot_nickname': bot_nickname,
-            'logout_url': logout_url
+            'logout_url': logout_url,
+            'debug_flg': debug_flg
         }
         
         path = os.path.join(os.path.dirname(__file__), 'templates/user/home.html')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-11 19:01+0900\n"
+"POT-Creation-Date: 2011-12-16 12:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: conf/settings.py:6 conf/settings.sample.py:6
+#: conf/settings.py:6
 msgid "English"
 msgstr ""
 
-#: conf/settings.py:7 conf/settings.sample.py:7
+#: conf/settings.py:7
 msgid "Japanese"
 msgstr ""
 
@@ -33,9 +33,9 @@ msgstr ""
 msgid "Nickname"
 msgstr ""
 
-#: templates/bot/add.html:30 templates/bot/add_message.html:35
+#: templates/bot/add.html:30 templates/bot/add_message.html:41
 #: templates/bot/edit.html:39 templates/user/bot.html:34
-#: templates/user/settings.html:66
+#: templates/user/settings.html:66 templates/user/settings.html.py:75
 msgid "Submit"
 msgstr ""
 
@@ -43,11 +43,11 @@ msgstr ""
 msgid "Add Message"
 msgstr ""
 
-#: templates/bot/add_message.html:23
+#: templates/bot/add_message.html:29
 msgid "Notification Time"
 msgstr ""
 
-#: templates/bot/add_message.html:31 templates/bot/show_message.html:17
+#: templates/bot/add_message.html:37 templates/bot/show_message.html:17
 msgid "Message"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/bot/edit.html:45 templates/user/home.html:233
+#: templates/bot/edit.html:45 templates/user/home.html:256
 msgid "Menu"
 msgstr ""
 
@@ -67,12 +67,12 @@ msgstr ""
 msgid "Bot List"
 msgstr ""
 
-#: templates/bot/show_message.html:27
+#: templates/bot/show_message.html:29
 msgid "Delete"
 msgstr ""
 
 #: templates/store/buy.html:17
-msgid "Upgrade from purchase"
+msgid "Refill from purchase"
 msgstr ""
 
 #: templates/store/buy.html:21
@@ -92,22 +92,20 @@ msgid "Purchase Success"
 msgstr ""
 
 #: templates/store/buy_success.html:19 templates/store/tweet_success.html:19
-msgid "Amount of notification remaining was upgraded!"
+msgid "Thank you!"
 msgstr ""
 
 #: templates/store/buy_success.html:21 templates/store/tweet_success.html:21
-#: templates/user/home.html:226
+#: templates/user/home.html:249
 msgid "Remaining"
 msgstr ""
 
-#: templates/store/index.html:17 templates/user/home.html:236
+#: templates/store/index.html:17 templates/user/home.html:259
 msgid "Notification Store"
 msgstr ""
 
 #: templates/store/index.html:19
-msgid ""
-"The notification store will be able to upgrade the amount of notifications "
-"remaining."
+msgid "The notification store will be able to refill from tweet or purchase."
 msgstr ""
 
 #: templates/store/index.html:22
@@ -119,11 +117,11 @@ msgid "Tweet"
 msgstr ""
 
 #: templates/store/tweet.html:17
-msgid "Upgrade from tweet"
+msgid "Refill from tweet"
 msgstr ""
 
 #: templates/store/tweet.html:19
-msgid "You can upgrade from a tweet once a week."
+msgid "You can refill from a tweet once a week."
 msgstr ""
 
 #: templates/store/tweet.html:24
@@ -138,7 +136,7 @@ msgstr ""
 msgid "Tweet Success"
 msgstr ""
 
-#: templates/user/bot.html:17 templates/user/home.html:235
+#: templates/user/bot.html:17 templates/user/home.html:258
 msgid "Bot Settings"
 msgstr ""
 
@@ -150,27 +148,27 @@ msgstr ""
 msgid "List"
 msgstr ""
 
-#: templates/user/home.html:99
+#: templates/user/home.html:122
 msgid "Bot ID is only alphanumeric character."
 msgstr ""
 
-#: templates/user/home.html:102
+#: templates/user/home.html:125
 msgid "Bot ID is required."
 msgstr ""
 
-#: templates/user/home.html:162
+#: templates/user/home.html:185
 msgid "Are you sure you want to delete?"
 msgstr ""
 
-#: templates/user/home.html:218
+#: templates/user/home.html:241
 msgid "Hi!"
 msgstr ""
 
-#: templates/user/home.html:234 templates/user/settings.html:17
+#: templates/user/home.html:257 templates/user/settings.html:17
 msgid "Notification Settings"
 msgstr ""
 
-#: templates/user/home.html:240
+#: templates/user/home.html:263
 msgid "Logout"
 msgstr ""
 
@@ -184,6 +182,10 @@ msgstr ""
 
 #: templates/user/settings.html:58
 msgid "Timezone"
+msgstr ""
+
+#: templates/user/settings.html:73
+msgid "Notification Test"
 msgstr ""
 
 #: templates/user/welcome.html:24

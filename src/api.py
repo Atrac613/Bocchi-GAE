@@ -8,6 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
+from google.appengine.api import taskqueue
 
 from django.utils import simplejson
 from pytz import timezone
@@ -283,11 +284,26 @@ class UpdateBotAddMessageAPI(webapp.RequestHandler):
             
             logging.info('time: %s' % time)
             
-            bot_message = BotMessage()
-            bot_message.bot_prefs_key = bot_prefs.key()
-            bot_message.time = time
-            bot_message.message = message
-            bot_message.put()
+            if time.find('simple_') > -1:
+                logging.info('Simple mode')
+                hour = int(time[7:])
+                for i in range(3):
+                    time = '%02d00-%02d00' % (hour, hour + 1)
+                    logging.info('time: %s' % time)
+                    bot_message = BotMessage()
+                    bot_message.bot_prefs_key = bot_prefs.key()
+                    bot_message.time = time
+                    bot_message.message = message
+                    bot_message.put()
+                    
+                    hour = hour + 1
+                
+            else:
+                bot_message = BotMessage()
+                bot_message.bot_prefs_key = bot_prefs.key()
+                bot_message.time = time
+                bot_message.message = message
+                bot_message.put()
             
         json = simplejson.dumps({'status': True}, ensure_ascii=False)
         self.response.content_type = 'application/json'
@@ -306,11 +322,30 @@ class UpdateBotDeleteMessageAPI(webapp.RequestHandler):
         mode = self.request.get('mode')
         if mode == 'delete_message':
             message_id = self.request.get('message_id')
-            
             bot_message = BotMessage.get_by_id(int(message_id))
+                
             if bot_message is not None:
-                bot_message.delete()
-        
+                advance_flg = self.request.get('advance')
+                if advance_flg == 'True':
+                    bot_message.delete()
+                else:
+                    try:
+                        hour = int(self.request.get('hour'))
+                        
+                        for i in range(3):
+                            time = '%02d00-%02d00' % (hour, hour + 1)
+                            
+                            bot_message_list = BotMessage.all().filter('time =', time).filter('message =', bot_message.message).fetch(20)
+                            if bot_message_list is not None:
+                                for row in bot_message_list:
+                                    logging.info('Delete: %s -> %s' % (time, bot_message.message))
+                                    row.delete()
+                            
+                            hour = hour + 1
+                            
+                    except:
+                        pass
+                
         json = simplejson.dumps({'status': True}, ensure_ascii=False)
         self.response.content_type = 'application/json'
         self.response.out.write(json)
@@ -327,6 +362,7 @@ class StoreTweetAPI(webapp.RequestHandler):
         store_tweet_history = StoreTweetHistory.all().filter('google_account =', user).filter('expired_at >', datetime.datetime.now()).get()
         if store_tweet_history is None:
             user_prefs.free_quantity = user_prefs.free_quantity + 100
+            user_prefs.activate_flg = True
             user_prefs.put()
             
             store_tweet_history = StoreTweetHistory()
@@ -342,6 +378,27 @@ class StoreTweetAPI(webapp.RequestHandler):
         self.response.content_type = 'application/json'
         self.response.out.write(json)
         
+class UpdateTestNotificationAPI(webapp.RequestHandler):
+    def post(self):
+
+        user = users.get_current_user()
+        
+        user_prefs = UserPrefs.all().filter('google_account =', user).get()
+        if user_prefs is None:
+            return self.error(404)
+        
+        try:
+            bot_id = user_prefs.bot_prefs_key.key().id()
+            taskqueue.add(url = '/task/find_device', params = {'user_id': user_prefs.key().id(), 'bot_id': bot_id})
+            data = {'status': True}
+        except:
+            logging.error('Add task failed.')
+            data = {'status': False}
+        
+        json = simplejson.dumps(data, ensure_ascii=False)
+        self.response.content_type = 'application/json'
+        self.response.out.write(json)
+        
 application = webapp.WSGIApplication(
                                      [('/api/update/user_prefs', UpdateUserPrefsAPI),
                                       ('/api/update/bot', UpdateBotAPI),
@@ -349,7 +406,8 @@ application = webapp.WSGIApplication(
                                       ('/api/update/bot/edit', UpdateBotEditAPI),
                                       ('/api/update/bot/add_message', UpdateBotAddMessageAPI),
                                       ('/api/update/bot/delete_message', UpdateBotDeleteMessageAPI),
-                                      ('/api/store/tweet', StoreTweetAPI)],
+                                      ('/api/store/tweet', StoreTweetAPI),
+                                      ('/api/update/test_notification', UpdateTestNotificationAPI)],
                                      debug=True)
 
 def main():

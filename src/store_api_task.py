@@ -103,6 +103,7 @@ class ItemCountUpTask(webapp.RequestHandler):
                 logging.info('product type is push150')
                 
                 user_prefs.paid_quantity = user_prefs.paid_quantity + 150
+                user_prefs.activate_flg = True
                 user_prefs.put()
                 
                 success = True
