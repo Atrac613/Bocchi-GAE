@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-16 12:45+0900\n"
+"POT-Creation-Date: 2011-12-17 23:52+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: conf/settings.py:6
+#: conf/settings.py:6 conf/settings.sample.py:6
 msgid "English"
 msgstr ""
 
-#: conf/settings.py:7
+#: conf/settings.py:7 conf/settings.sample.py:7
 msgid "Japanese"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgstr ""
 msgid "Add Message"
 msgstr ""
 
-#: templates/bot/add_message.html:29
+#: templates/bot/add_message.html:29 templates/user/settings.html:30
 msgid "Notification Time"
 msgstr ""
 
@@ -176,10 +176,6 @@ msgstr ""
 msgid "Notify of roughly per day"
 msgstr ""
 
-#: templates/user/settings.html:30
-msgid "Notification time"
-msgstr ""
-
 #: templates/user/settings.html:58
 msgid "Timezone"
 msgstr ""
@@ -193,7 +189,7 @@ msgid "What is Bocchi?"
 msgstr ""
 
 #: templates/user/welcome.html:26
-msgid "Bocchi is protective of your silent mobile phones."
+msgid "Bocchi is protective of your silent iPhone."
 msgstr ""
 
 #: templates/user/welcome.html:27

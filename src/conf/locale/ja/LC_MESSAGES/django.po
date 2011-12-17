@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-16 15:00+0900\n"
+"POT-Creation-Date: 2011-12-18 00:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: conf/settings.py:6
+#: conf/settings.py:6 conf/settings.sample.py:6
 msgid "English"
 msgstr ""
 
-#: conf/settings.py:7
+#: conf/settings.py:7 conf/settings.sample.py:7
 msgid "Japanese"
 msgstr ""
 
@@ -43,13 +43,19 @@ msgstr "送信"
 msgid "Add Message"
 msgstr "メッセージを追加"
 
-#: templates/bot/add_message.html:29
-#, fuzzy
+#: templates/bot/add_message.html:19 templates/bot/schedule_list.html:19
+msgid "Change basic mode"
+msgstr "標準モードへ変更"
+
+#: templates/bot/add_message.html:21 templates/bot/schedule_list.html:21
+msgid "Change advanced mode"
+msgstr "拡張モードへ変更"
+
+#: templates/bot/add_message.html:29 templates/user/settings.html:30
 msgid "Notification Time"
 msgstr "通知時間帯"
 
 #: templates/bot/add_message.html:37 templates/bot/show_message.html:17
-#, fuzzy
 msgid "Message"
 msgstr "メッセージ"
 
@@ -108,27 +114,28 @@ msgstr "通知ストア"
 
 #: templates/store/index.html:19
 msgid "The notification store will be able to refill from tweet or purchase."
-msgstr "通知ストアは通知残数のチャージをする事ができます。"
+msgstr ""
+"通知ストアはツイートまたは購入によって通知残数のチャージをする事ができます。"
 
 #: templates/store/index.html:22
 msgid "Store Menu"
 msgstr "ストアメニュー"
 
-#: templates/store/index.html:23
+#: templates/store/index.html:23 templates/store/tweet.html:22
 msgid "Tweet"
-msgstr ""
+msgstr "ツイート"
 
 #: templates/store/tweet.html:17
 msgid "Refill from tweet"
-msgstr "Tweet してチャージ"
+msgstr "ツイートしてチャージ"
 
 #: templates/store/tweet.html:19
 msgid "You can refill from a tweet once a week."
-msgstr "一週間に一度 Tweet をしてチャージする事ができます。"
+msgstr "一週間に一度ツイートをしてチャージする事ができます。"
 
 #: templates/store/tweet.html:24
 msgid "You can not tweet."
-msgstr "あなたは Tweet できません。"
+msgstr "あなたはツイートできません。"
 
 #: templates/store/tweet.html:25
 msgid "Expired at"
@@ -136,7 +143,7 @@ msgstr "期限が切れる日"
 
 #: templates/store/tweet_success.html:17
 msgid "Tweet Success"
-msgstr "Tweet 成功"
+msgstr "ツイート成功"
 
 #: templates/user/bot.html:17 templates/user/home.html:258
 msgid "Bot Settings"
@@ -178,26 +185,21 @@ msgstr "ログアウト"
 msgid "Notify of roughly per day"
 msgstr "大体一日あたりの通知"
 
-#: templates/user/settings.html:30
-msgid "Notification time"
-msgstr "通知時間帯"
-
 #: templates/user/settings.html:58
 msgid "Timezone"
 msgstr "タイムゾーン"
 
 #: templates/user/settings.html:73
-#, fuzzy
 msgid "Notification Test"
-msgstr "通知時間帯"
+msgstr "通知テスト"
 
 #: templates/user/welcome.html:24
 msgid "What is Bocchi?"
 msgstr "ぼっちってなに？"
 
 #: templates/user/welcome.html:26
-msgid "Bocchi is protective of your silent mobile phones."
-msgstr "ぼっちはあなたの静かな携帯電話を守ります。"
+msgid "Bocchi is protective of your silent iPhone."
+msgstr "ぼっちはあなたの静かな iPhone を守ります。"
 
 #: templates/user/welcome.html:27
 msgid "You can create a own notification bot systems."

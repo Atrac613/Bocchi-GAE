@@ -16,9 +16,9 @@
 		<div class="content-primary">
 			<ul data-role="listview">
 				{% if advance_flg %}
-				<li><a href="?bot_id={{ bot_id }}&advance=False">Change basic mode</a></li>
+				<li><a href="?bot_id={{ bot_id }}&advance=False">{% trans "Change basic mode" %}</a></li>
 				{% else %}
-				<li><a href="?bot_id={{ bot_id }}&advance=True">Change advanced mode</a></li>
+				<li><a href="?bot_id={{ bot_id }}&advance=True">{% trans "Change advanced mode" %}</a></li>
 				{% endif %}
 				{% for row in schedule_list %}
 				<li data-role="list-divider">{{ row.time }}</li>

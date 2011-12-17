@@ -19,7 +19,7 @@
 			<p>{% trans "You can refill from a tweet once a week." %}</p>
 			
 			{% if can_tweet %}
-				<button type="button" id="tweet">Tweet</button>
+				<button type="button" id="tweet">{% trans "Tweet" %}</button>
 			{% else %} 
 				<p>{% trans "You can not tweet." %}</p>
 				<p>{% trans "Expired at" %}:<br />{{ expired_at }}</p>
