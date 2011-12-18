@@ -167,6 +167,7 @@ class UpdateUserPrefsAPI(webapp.RequestHandler):
         else:
             user_prefs.notify_probability = 0.0
             
+        user_prefs.activate_flg = True
         user_prefs.put()
         
         json = simplejson.dumps({'status': True}, ensure_ascii=False)

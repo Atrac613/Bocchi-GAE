@@ -89,7 +89,7 @@ class AuthUpdatePage(webapp.RequestHandler):
                 user_prefs.free_quantity = 100
                 user_prefs.timezone = 'Asia/Tokyo'
                 user_prefs.notify_probability = 0.0
-                user_prefs.activate_flg = True
+                user_prefs.activate_flg = False
                 user_prefs.delete_flg = False
                 user_prefs.debug_flg = False
                 
