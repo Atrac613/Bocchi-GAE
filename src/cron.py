@@ -28,7 +28,7 @@ class NotifyCron(webapp.RequestHandler):
         if last_cursor:
             user_list_query.with_cursor(last_cursor)
         
-        user_list = user_list_query.fetch(1)
+        user_list = user_list_query.fetch(10)
         if user_list is not None:
             logging.info('count: %d' % len(user_list))
             for user in user_list:
@@ -50,7 +50,7 @@ class NotifyCron(webapp.RequestHandler):
         
         user_list_query = UserPrefs.all().filter('activate_flg =', True).filter('schedule_list =', datetime.datetime.now().hour)
         user_list_query.with_cursor(cursor)
-        user_list = user_list_query.fetch(1)
+        user_list = user_list_query.fetch(10)
         logging.info('count: %d' % len(user_list))
         if memcache.get('notify_cursor_%d' % (page_id+1)):
             memcache.delete('notify_cursor_%d' % (page_id+1))
